@@ -1,26 +1,36 @@
 
 
-## Plan: Add "Pain Points" Section with Scroll-Reveal Alternating Blocks
+## Plan: Timeline Layout for Pain Points Section
 
 ### Overview
-Create a new light-themed section below the hero with 5 alternating left/right content blocks that animate in on scroll using framer-motion's `whileInView`.
+Redesign the Pain Points section to use a vertical timeline with a central line, blocks alternating left/right attached to that line, with scroll-triggered animations.
 
-### New File: `src/components/PainPoints.tsx`
-- Section with white/light background to contrast the dark hero
-- Section title: "Stop Managing Your Rota. Start Leading Your Surgery."
-- 5 blocks, each containing an icon, header, and body text
-- Odd blocks: content left-aligned; even blocks: content right-aligned
-- Each block uses `motion.div` with `whileInView` for scroll-triggered fade+slide animation (slide from left for odd, right for even)
-- Each block gets a subtle visual accent (e.g., a colored left/right border or icon) using the teal glow color for continuity
-- Clean card-style or minimal layout with generous spacing
+### Changes to `src/components/PainPoints.tsx`
 
-### Edit: `src/pages/Index.tsx`
-- Import and add `<PainPoints />` below `<Hero />`
+**Layout:**
+- Add a vertical line down the center using a `div` with `absolute` positioning, thin width (2px), full height, teal/gray color
+- Each block becomes a timeline entry: 50% width, positioned left or right of the center line
+- A small circle/dot on the center line at each block's position (connection point)
+- On mobile: single column with line on the left edge
 
-### Design Details
-- Background: white (`bg-white text-gray-900`)
-- Typography: `font-display` for headers, `font-body` for body text
-- Animation: `whileInView={{ opacity: 1, x: 0 }}` with `initial={{ opacity: 0, x: -60 }}` (alternating sign)
-- `viewport={{ once: true, amount: 0.3 }}` so each block animates once when 30% visible
-- Each block has a small icon from lucide-react matching the pain point theme
+**Animation:**
+- Each block fades in + slides horizontally from its side (left blocks slide from left, right from right)
+- The connecting dot scales in when the block enters viewport
+- Staggered timing using `transition.delay` based on index
+
+**Structure per block:**
+```text
+  [Left block]  ●——  |
+                     |
+                |  ——●  [Right block]
+                     |
+  [Left block]  ●——  |
+```
+
+- Icon + header + body inside each block card
+- Dot sits on the center line with a small horizontal connector line
+
+### Responsive
+- `md:` breakpoint for two-column timeline
+- Below `md`: vertical line on left, all blocks on right
 
