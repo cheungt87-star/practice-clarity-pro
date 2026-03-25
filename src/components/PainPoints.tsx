@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Users, ShieldAlert, CalendarClock, MessageSquare, Database } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const painPoints = [
   {
@@ -76,6 +77,7 @@ const iconVariants = {
 };
 
 const PainPoints = () => {
+  const isMobile = useIsMobile();
   return (
     <section className="bg-background py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
@@ -153,9 +155,9 @@ const PainPoints = () => {
 
                   {/* Content card */}
                   <motion.div
-                    initial={{ opacity: 0, x: isRight ? 120 : -120 }}
+                    initial={{ opacity: 0, x: isMobile ? 80 : (isRight ? 120 : -120) }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
+                    viewport={{ once: true, amount: 0.05 }}
                     transition={{
                       duration: 0.7,
                       ease: [0.25, 0.1, 0.25, 1],
