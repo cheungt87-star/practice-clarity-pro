@@ -45,7 +45,8 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-display font-bold text-headline text-center text-glow leading-[1.05] tracking-tight max-w-4xl mx-auto text-5xl sm:text-6xl md:text-7xl lg:text-8xl"
+          className="font-display font-bold text-center text-glow leading-[1.05] tracking-tight max-w-4xl mx-auto text-5xl sm:text-6xl md:text-7xl lg:text-8xl"
+          style={{ color: "hsl(222 47% 11%)" }}
         >
           Run Your Clinic
           <br />
@@ -57,7 +58,8 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.25 }}
-          className="text-subtext text-center max-w-2xl mx-auto mt-6 text-base sm:text-lg leading-relaxed font-body"
+          className="text-center max-w-2xl mx-auto mt-6 text-base sm:text-lg leading-relaxed font-body"
+          style={{ color: "hsl(215 20% 45%)" }}
         >
           SuperGP replaces spreadsheets, WhatsApp, and paper rotas with one intelligent platform—giving you real-time visibility, control, and confidence across your entire practice.
         </motion.p>
