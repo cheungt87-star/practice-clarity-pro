@@ -45,42 +45,66 @@ const PainPoints = () => {
           Start Leading Your Surgery.
         </motion.h2>
 
-        <div className="space-y-16 sm:space-y-24">
-          {painPoints.map((point, index) => {
-            const isEven = index % 2 === 1;
-            const Icon = point.icon;
+        {/* Timeline container */}
+        <div className="relative">
+          {/* Vertical center line */}
+          <div
+            className="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5"
+            style={{ backgroundColor: "hsl(172 66% 50% / 0.3)" }}
+          />
 
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: isEven ? 60 : -60 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className={`flex flex-col sm:flex-row items-start gap-6 ${
-                  isEven ? "sm:flex-row-reverse sm:text-right" : ""
-                }`}
-              >
-                <div
-                  className={`shrink-0 w-14 h-14 rounded-xl flex items-center justify-center`}
-                  style={{ backgroundColor: "hsl(172 66% 50% / 0.12)" }}
-                >
-                  <Icon
-                    className="w-7 h-7"
-                    style={{ color: "hsl(172 66% 50%)" }}
+          <div className="space-y-12 md:space-y-16">
+            {painPoints.map((point, index) => {
+              const isRight = index % 2 === 1;
+              const Icon = point.icon;
+
+              return (
+                <div key={index} className="relative flex items-start md:items-center">
+                  {/* Dot on the line */}
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.4, delay: 0.1 }}
+                    className="absolute left-4 md:left-1/2 -translate-x-1/2 z-10 w-4 h-4 rounded-full border-[3px] border-white"
+                    style={{ backgroundColor: "hsl(172 66% 50%)" }}
                   />
+
+                  {/* Content block */}
+                  <motion.div
+                    initial={{ opacity: 0, x: isRight ? 60 : -60 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
+                    className={`ml-12 md:ml-0 md:w-[calc(50%-2rem)] ${
+                      isRight ? "md:ml-auto md:pl-0" : "md:mr-auto md:pr-0"
+                    }`}
+                  >
+                    <div
+                      className={`flex items-start gap-4 ${
+                        isRight ? "md:flex-row" : "md:flex-row-reverse md:text-right"
+                      }`}
+                    >
+                      <div
+                        className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
+                        style={{ backgroundColor: "hsl(172 66% 50% / 0.12)" }}
+                      >
+                        <Icon className="w-6 h-6" style={{ color: "hsl(172 66% 50%)" }} />
+                      </div>
+                      <div>
+                        <h3 className="font-display text-xl sm:text-2xl font-semibold text-gray-900 mb-1.5">
+                          {point.header}
+                        </h3>
+                        <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
+                          {point.body}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
                 </div>
-                <div>
-                  <h3 className="font-display text-xl sm:text-2xl font-semibold text-gray-900 mb-2">
-                    {point.header}
-                  </h3>
-                  <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-xl">
-                    {point.body}
-                  </p>
-                </div>
-              </motion.div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
