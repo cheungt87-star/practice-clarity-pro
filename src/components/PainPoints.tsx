@@ -70,9 +70,9 @@ const PainPoints = () => {
           className="text-center mb-16"
         >
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-            Stop Managing Your Rota.
+            Your clinic shouldn't run on spreadsheets.
             <br />
-            <span className="text-gradient">Start Leading Your Surgery.</span>
+            <span className="text-gradient">It's costing you more than you think!</span>
           </h2>
           <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
             Sound familiar? These are the challenges holding your practice back.
