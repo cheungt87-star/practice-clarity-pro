@@ -1,33 +1,29 @@
 
 
-## Make the Final CTA Box Stand Out
+## Align the CTA Gradient with the Site's Visual Identity
 
-The current CTA box has the green gradient, white text, and a white button. To make it more impactful while keeping the site's look and feel (teal primary, Space Grotesk headings, rounded cards, motion animations), here's the plan:
+The green gradient feels disconnected because the rest of the site uses a teal-to-purple palette. The fix is to swap it to match the site's signature gradient.
+
+### Current state
+- **Site palette**: teal primary (`hsl(172 66% 50%)`), purple accent (`hsl(260 45% 65%)`), with a consistent `text-gradient` of teal → cyan → purple
+- **Hero/Benefits backgrounds**: soft lavender-to-cyan-to-white (`hsla(259, 42%, 86%) → hsla(193, 37%, 85%) → hsla(0, 0%, 96%)`)
+- **CTA box**: green gradient that doesn't appear anywhere else on the site
 
 ### Changes to `src/components/BenefitsSection.tsx`
 
-1. **Break CTA out of the `max-w-5xl` container** -- make it full-bleed within the section so it feels like a bold closing statement, not just another card in the grid. Use negative margins or move it outside the inner `div`.
+1. **Replace the green gradient** with a teal-to-purple gradient that mirrors the site's accent palette:
+   ```
+   linear-gradient(135deg, hsla(172, 66%, 50%, 1) 0%, hsla(260, 45%, 65%, 1) 100%)
+   ```
 
-2. **Add a subtle radial glow overlay** -- a soft white radial gradient overlay on top of the green gradient to add depth and draw the eye.
+2. **Update the button shadow glow** from green (`rgba(34,197,94,0.3)`) to teal (`rgba(45,212,191,0.3)`) to match.
 
-3. **Increase vertical padding** -- bump to `py-16 sm:py-20` for more breathing room and visual weight.
+3. **Update the radial glow overlay** — keep the same white radial but it will naturally complement the new gradient.
 
-4. **Add a decorative element** -- a subtle dotted or grid pattern overlay at low opacity for texture, consistent with the modern SaaS feel.
-
-5. **Enhance the button**:
-   - Make it larger (`px-10 py-5 text-xl`)
-   - Add a subtle shadow glow using `shadow-[0_0_30px_rgba(34,197,94,0.3)]`
-   - Add a gentle pulse animation on the arrow icon to suggest action
-
-6. **Add a trust line** below the subheading -- e.g., "Join 50+ UK practices already transforming their operations" in smaller text, adding social proof and visual hierarchy.
-
-7. **Scale up the entrance animation** -- use `scale: [0.95, 1]` alongside the existing y-translate for a more dramatic reveal.
+Everything else (dot pattern, trust line, animation, layout) stays exactly as-is.
 
 ### Technical Details
-
-- All changes in `src/components/BenefitsSection.tsx`
-- Button glow uses Tailwind arbitrary shadow values
-- Arrow pulse uses framer-motion's `animate` prop with a repeating transition
-- Trust line is a new `<p>` element between the subheading and button
-- Full-bleed achieved by moving the CTA `motion.div` outside the `max-w-5xl` wrapper but inside the `section`, with its own `max-w-6xl mx-auto px-4` for controlled width
+- Single file edit: `src/components/BenefitsSection.tsx`
+- Change the inline `style` background property on the CTA `motion.div`
+- Change the button's `shadow-[...]` arbitrary value
 
