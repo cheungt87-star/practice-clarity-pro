@@ -1,33 +1,32 @@
 
 
-## Plan: Feature Showcase with Tabbed Video Demos
+## Plan: Redesign Pain Points for Scannability
 
-### What's changing
-Replace the current 6-card grid in `KeyFeatures.tsx` with a tabbed feature showcase. Each tab represents a feature, and selecting it reveals a description + a video demo area (reusing the DashboardMockup-style player). Fully mobile responsive.
+### Problem with current design
+The alternating timeline layout forces the eye to zigzag left-right across a center line. With 5 items and dense paragraph text, it's visually heavy and hard to scan quickly. The timeline metaphor doesn't add meaning here — these aren't sequential steps.
 
-### Layout
+### New approach: Clean card grid with visual hierarchy
 
-**Desktop**: Horizontal tab bar across the top, with the selected feature's content below — left side has title, description bullets, right side has the video player in a browser-chrome frame.
+Replace the timeline with a simple, scannable grid of pain-point cards that uses color, iconography, and short punchy copy to let users instantly recognize their problems.
 
-**Mobile**: Tabs become a horizontal scrollable pill bar. Content stacks vertically — description on top, video below.
+### Changes to `src/components/PainPoints.tsx`
 
-### File changes
+1. **Remove the timeline** — delete the vertical line, dots, ripples, connector lines, and alternating left/right logic.
 
-**Edit: `src/components/KeyFeatures.tsx`**
+2. **Rewrite copy to be punchier** — shorten each body to 1 short sentence max. Add a short stat or "impact" line per card (e.g. "20%+ of management time lost") styled as a highlighted callout inside the card.
 
-1. Replace the card grid with a `Tabs` component (from existing `src/components/ui/tabs.tsx` — Radix).
-2. Keep the existing `features` array data (icon, title, lines, comingSoon) and add a `videoLabel` string per feature for the video placeholder text.
-3. Each `TabsTrigger` shows the feature icon + title, styled as pills with the active tab highlighted in primary color.
-4. Each `TabsContent` renders a two-column layout (stacked on mobile):
-   - **Left column**: Feature title (large), bullet points with check icons (reuse existing style), and "Coming Soon" badge where applicable.
-   - **Right column**: A video player placeholder — browser chrome title bar (dots + feature name), aspect-video area with play button and label (similar to `DashboardMockup` but inline, not a separate component).
-5. The tab list on mobile uses `overflow-x-auto` with `flex-nowrap` for horizontal scrolling, showing shorter labels or just icons on small screens.
-6. Animate content transitions with `framer-motion` — fade + slight slide on tab change using `AnimatePresence` keyed to the active tab value.
-7. Keep the existing section background gradient, badge ("THE PRODUCT"), and title.
+3. **Card grid layout** — Use a `grid-cols-1 md:grid-cols-2 lg:grid-cols-3` grid. Top row: 3 cards. Bottom row: 2 cards centered (`md:col-span-2 lg:col-span-1` or flex centering for the last row).
 
-### Technical details
-- Uses existing Radix `Tabs` from `@/components/ui/tabs` — no new dependencies.
-- Controlled `Tabs` with `useState` to drive `AnimatePresence` key for smooth content transitions.
-- Responsive: `grid-cols-1 lg:grid-cols-2` for content area; tab bar uses `overflow-x-auto scrollbar-hide` on mobile with `whitespace-nowrap`.
-- Video placeholder is self-contained inline (no separate component needed).
+4. **Card design** — Each card gets:
+   - A colored icon badge at top (red/amber tones instead of teal, to signal "problem" framing)
+   - Bold header
+   - Short 1-line description
+   - A highlighted stat/impact line at the bottom in a subtle accent background strip
+
+5. **Staggered fade-in** — Simple `motion.div` with staggered `delay` per card index on scroll. No complex timeline animations.
+
+6. **Add a subtitle** under the heading — something like "Sound familiar? These are the challenges holding your practice back." to frame the section as empathetic problem identification.
+
+### Files
+- **Edit**: `src/components/PainPoints.tsx` — full rewrite of layout and animations
 
