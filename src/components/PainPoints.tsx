@@ -39,7 +39,7 @@ const dotGlow = {
       "0 0 6px 2px hsl(172 66% 50% / 0.15)",
     ],
     transition: {
-      scale: { type: "spring", stiffness: 300, damping: 15 },
+      scale: { type: "spring" as const, stiffness: 300, damping: 15 },
       boxShadow: { duration: 2, repeat: Infinity, repeatType: "reverse" as const },
     },
   },
@@ -50,7 +50,7 @@ const ripple = {
   visible: {
     scale: [1, 2.5],
     opacity: [0.5, 0],
-    transition: { duration: 1.2, ease: "easeOut" },
+    transition: { duration: 1.2, ease: "easeOut" as const },
   },
 };
 
@@ -58,7 +58,7 @@ const connectorLine = (isRight: boolean) => ({
   hidden: { scaleX: 0 },
   visible: {
     scaleX: 1,
-    transition: { duration: 0.4, ease: "easeOut", delay: 0.3 },
+    transition: { duration: 0.4, ease: "easeOut" as const, delay: 0.3 },
   },
   style: {
     originX: isRight ? 0 : 1,
@@ -71,7 +71,7 @@ const iconVariants = {
     scale: 1,
     rotate: 0,
     opacity: 1,
-    transition: { type: "spring", stiffness: 200, damping: 12 },
+    transition: { type: "spring" as const, stiffness: 200, damping: 12 },
   },
 };
 
