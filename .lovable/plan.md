@@ -1,33 +1,24 @@
 
 
-## Plan: Add Interactive Key Features Section
+## Plan: Bring the CTA Section to Life
 
-### Overview
-Create a new `KeyFeatures` component that matches the hero's light gradient aesthetic, with interactive feature cards that respond to user interaction.
+### What's changing
+Transform the static CTA section into a visually dynamic, animated section with floating decorative elements, animated gradient blobs, and a pulsing CTA button.
 
-### Design
-- Same light gradient background as hero (`linear-gradient(135deg, hsla(259, 42%, 86%, 1) ...`)
-- Section badge: "THE PRODUCT" with glowing dot (same pattern as hero badge)
-- Section title with gradient text on the accent line
-- **Interactive cards**: 7 feature cards in a responsive grid (2-3 columns on desktop, 1 on mobile). Each card has an icon, title, and description. Cards will:
-  - Animate in on scroll (staggered fade-up via framer-motion)
-  - Have a hover effect: scale up slightly, glow border, icon color shift
-  - The "Coming Soon" card (Policy GPT) gets a distinct badge/border treatment
-- Icons from lucide-react: `Calendar`, `LayoutDashboard`, `CheckSquare`, `Building2`, `Users`, `Lock`, `FileText`
+### Enhancements to `src/components/CtaSection.tsx`
+
+1. **Animated floating orbs** — 3-4 soft gradient blobs that drift slowly using framer-motion's `animate` with `repeat: Infinity` and `repeatType: "reverse"`. Different sizes, colors (teal, purple, blue), and movement paths to create organic depth.
+
+2. **Subtle particle/sparkle dots** — Small animated dots scattered across the section that fade in and out at staggered intervals, adding texture.
+
+3. **Animated gradient background** — Replace the static gradient with a slowly shifting one using CSS `@keyframes` or a large moving radial glow that pans across the section.
+
+4. **Button glow pulse** — Add a pulsing glow ring animation behind the CTA button (expanding ring that fades out, repeating). On hover, intensify the glow and add a slight lift.
+
+5. **Staggered text reveal** — Animate each word of the headline individually with staggered delays for a more cinematic entrance.
+
+6. **Decorative accents** — Faint rotating ring or arc shapes in the background corners for geometric interest.
 
 ### Files
-- **New**: `src/components/KeyFeatures.tsx` — full section component with motion animations
-- **Edit**: `src/pages/Index.tsx` — import and add `<KeyFeatures />` after `<PainPoints />`
-
-### Component Structure
-```
-<section> (hero-matching gradient bg + grid overlay)
-  Badge: "THE PRODUCT"
-  Title: "Everything you need to run your practice — " + gradient "in one place"
-  Grid of 7 feature cards (motion.div with staggered whileInView)
-    Each card: icon box, title (font-display), two-line description (font-body)
-    Hover: scale(1.03), glow-border, elevated shadow
-    "Coming Soon" badge on Policy GPT card
-</section>
-```
+- **Edit**: `src/components/CtaSection.tsx` — all changes contained here
 
