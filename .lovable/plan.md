@@ -1,11 +1,13 @@
 
 
-## CTA Section Adjustments
+## Fix CTA Section Centering
+
+The issue is `whitespace-nowrap` on the h2 -- on certain viewport widths, the text overflows the container and breaks centering since the text won't wrap but can exceed `max-w-4xl`.
 
 ### Changes to `src/components/CtaSection.tsx`
 
-1. **Reduce height**: Change `py-28 sm:py-36` to `py-16 sm:py-20`
-2. **Bolder title on one line**: Bump to `font-extrabold` with `text-5xl sm:text-6xl lg:text-7xl whitespace-nowrap`, reduce `mb-5` to `mb-3`
-3. **More visible subheader**: Increase from `text-xl sm:text-2xl text-muted-foreground` to `text-2xl sm:text-3xl text-foreground/70 font-medium`, reduce `mb-12` to `mb-8`
-4. **Widen container**: Change `max-w-3xl` to `max-w-4xl` to give the title room to stay on one line
+1. **Remove `whitespace-nowrap`** from the h2 -- it prevents proper centering when the text is wider than the container
+2. **Add `flex flex-col items-center justify-center`** to the content wrapper for robust centering
+3. **Add `min-h-[280px]`** to the section to ensure vertical centering looks balanced
+4. **Center the button** with `flex justify-center` on the motion.div wrapper
 
