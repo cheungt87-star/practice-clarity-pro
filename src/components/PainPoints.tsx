@@ -1,104 +1,67 @@
 import { motion } from "framer-motion";
-import { X, Check, ArrowRight, ArrowDown } from "lucide-react";
+import { Users, ShieldAlert, CalendarClock, MessageSquare, Database } from "lucide-react";
 
-const transformations = [
+const painPoints = [
   {
-    pain: {
-      title: "Your rota falls apart every week",
-      description: "Spreadsheets break constantly and leave you scrambling to fill last-minute gaps.",
-    },
-    outcome: "Always know who's working, where, and when",
+    icon: Users,
+    header: "Your Rota Falls Apart Weekly",
+    body: "Your rota lives in spreadsheets, breaks constantly, and leaves you scrambling to plug last-minute gaps.",
+    impact: "£50k+ annual locum overspend",
   },
   {
-    pain: {
-      title: "You're not audit-ready",
-      description: "Compliance is scattered across systems, so inspections become a last-minute scramble.",
-    },
-    outcome: "Stay audit-ready with everything in one place",
+    icon: ShieldAlert,
+    header: "You're Not Audit-Ready",
+    body: "Compliance is scattered across systems, so when inspections come, you're chasing evidence instead of being prepared.",
+    impact: "Critical audit risk",
   },
   {
-    pain: {
-      title: "You're leaving appointments on the table",
-      description: "Without clear visibility, capacity goes unused and patients go unseen.",
-    },
-    outcome: "Maximise utilisation with a real-time clinic view",
+    icon: CalendarClock,
+    header: "You're Leaving Appointments on the Table",
+    body: "Without a clear view of staffing and rooms, capacity goes unused and patients go unseen.",
+    impact: "15–20% appointment slots wasted",
   },
   {
-    pain: {
-      title: "Your team is drowning in admin",
-      description: "Endless WhatsApps, emails, and updates slow everything down.",
-    },
-    outcome: "Cut admin time dramatically with one central system",
+    icon: MessageSquare,
+    header: "Your Team Is Drowning in Admin",
+    body: "Endless WhatsApps, emails, and updates eat into your day and slow everything down.",
+    impact: "20%+ of bandwidth lost",
   },
   {
-    pain: {
-      title: "Everything lives in different places",
-      description: "Staff, rota, and compliance data are split across tools—causing errors and duplication.",
-    },
-    outcome: "One source of truth for your entire clinic",
+    icon: Database,
+    header: "Everything Lives in Different Places",
+    body: "Staff, rota, and compliance data are split across tools—leading to duplication, confusion, and mistakes.",
+    impact: "Hours of repeated data entry weekly",
   },
 ];
 
-const TransformationRow = ({ item, index }: { item: typeof transformations[number]; index: number }) => {
+const PainCard = ({ point, index }: { point: typeof painPoints[number]; index: number }) => {
+  const Icon = point.icon;
   return (
-    <div className="flex flex-col md:flex-row items-stretch gap-4 md:gap-0">
-      {/* Pain Side */}
-      <motion.div
-        initial={{ opacity: 0, x: -40 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.5, delay: index * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
-        whileHover={{ x: -2 }}
-        className="flex-1 rounded-2xl border border-destructive/20 bg-destructive/5 p-5 sm:p-6 cursor-default transition-colors hover:border-destructive/40"
-      >
-        <div className="flex items-start gap-3">
-          <div className="w-8 h-8 rounded-full flex items-center justify-center bg-destructive/10 shrink-0 mt-0.5">
-            <X className="w-4 h-4 text-destructive" />
-          </div>
-          <div>
-            <h3 className="font-display text-lg font-semibold text-foreground">{item.pain.title}</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed mt-1">{item.pain.description}</p>
-          </div>
+    <motion.div
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+      className="group rounded-2xl border border-border/60 bg-muted/40 backdrop-blur-sm overflow-hidden cursor-default hover:border-destructive/30 transition-colors"
+    >
+      <div className="p-5 sm:p-6">
+        <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-destructive/10 mb-4">
+          <Icon className="w-6 h-6 text-destructive" />
         </div>
-      </motion.div>
-
-      {/* Arrow Connector */}
-      <motion.div
-        initial={{ opacity: 0, x: -8 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.4, delay: index * 0.08 + 0.15 }}
-        whileHover={{ x: 4 }}
-        className="flex items-center justify-center md:px-5 py-2 md:py-0"
-      >
-        <ArrowRight className="hidden md:block w-6 h-6 text-primary" />
-        <ArrowDown className="md:hidden w-6 h-6 text-primary" />
-      </motion.div>
-
-      {/* Outcome Side */}
-      <motion.div
-        initial={{ opacity: 0, x: 40 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.5, delay: index * 0.08 + 0.2, ease: [0.25, 0.1, 0.25, 1] }}
-        whileHover={{ scale: 1.02 }}
-        className="flex-1 rounded-2xl border border-primary/20 bg-primary/5 p-5 sm:p-6 cursor-default transition-shadow hover:shadow-[0_0_20px_-4px_hsl(var(--primary)/0.2)]"
-      >
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full flex items-center justify-center bg-primary/10 shrink-0">
-            <Check className="w-4 h-4 text-primary" />
-          </div>
-          <h3 className="font-display text-lg font-semibold text-foreground">{item.outcome}</h3>
-        </div>
-      </motion.div>
-    </div>
+        <h3 className="font-display text-xl font-semibold text-foreground mb-2">{point.header}</h3>
+        <p className="text-muted-foreground text-base leading-relaxed">{point.body}</p>
+      </div>
+      <div className="px-5 sm:px-6 py-3 bg-destructive/5 border-t border-border/40">
+        <p className="text-sm font-medium text-destructive">⚡ {point.impact}</p>
+      </div>
+    </motion.div>
   );
 };
 
 const PainPoints = () => {
   return (
     <section className="bg-background py-24 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -107,17 +70,26 @@ const PainPoints = () => {
           className="text-center mb-16"
         >
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-            Still running your clinic{" "}
-            <span className="text-gradient">like this?</span>
+            Stop Managing Your Rota.
+            <br />
+            <span className="text-gradient">Start Leading Your Surgery.</span>
           </h2>
           <p className="mt-4 text-muted-foreground text-lg max-w-2xl mx-auto">
-            Here's what it's costing you—and how it should work instead.
+            Sound familiar? These are the challenges holding your practice back.
           </p>
         </motion.div>
 
-        <div className="flex flex-col gap-5">
-          {transformations.map((item, index) => (
-            <TransformationRow key={index} item={item} index={index} />
+        {/* Top row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {painPoints.slice(0, 3).map((point, index) => (
+            <PainCard key={index} point={point} index={index} />
+          ))}
+        </div>
+
+        {/* Bottom row — centered */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5 max-w-[calc(66.666%+0.625rem)] mx-auto lg:max-w-none lg:w-2/3 lg:mx-auto">
+          {painPoints.slice(3).map((point, index) => (
+            <PainCard key={index + 3} point={point} index={index + 3} />
           ))}
         </div>
       </div>
