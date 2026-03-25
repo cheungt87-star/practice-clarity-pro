@@ -4,7 +4,7 @@ import PainPoints from "@/components/PainPoints";
 import KeyFeatures from "@/components/KeyFeatures";
 import TeamSection from "@/components/TeamSection";
 import BenefitsSection from "@/components/BenefitsSection";
-import CtaSection from "@/components/CtaSection";
+
 import Footer from "@/components/Footer";
 
 const Index = () => {
