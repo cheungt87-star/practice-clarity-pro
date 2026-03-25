@@ -225,8 +225,8 @@ const BenefitsSection = () => {
           }}
         />
 
-        <h3 className="relative font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white mb-3">
-          Less Admin. <span className="text-yellow-100">More Patient Care.</span>
+        <h3 className="relative font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-foreground mb-3">
+          Less Admin. <span className="text-gradient">More Patient Care.</span>
         </h3>
         <p className="relative font-display font-medium text-xl sm:text-2xl text-white mb-4">
           What are you waiting for?
