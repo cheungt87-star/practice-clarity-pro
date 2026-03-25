@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Calendar, LayoutDashboard, CheckSquare, Building2, Users, Lock, FileText } from "lucide-react";
+import { Calendar, LayoutDashboard, CheckSquare, Building2, Users, FileText, Check } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const features = [
@@ -40,13 +40,6 @@ const features = [
     lines: [
       "Manage roles, permissions, and staffing without spreadsheets.",
       "Scale your team without losing control.",
-    ],
-  },
-  {
-    icon: Lock,
-    title: "Built for NHS Governance",
-    lines: [
-      "Audit trails, permission controls, and rota approvals — designed for real-world compliance.",
     ],
   },
   {
@@ -136,8 +129,10 @@ const KeyFeatures = () => {
                   boxShadow: "0 12px 32px -8px hsl(172 66% 50% / 0.18)",
                   transition: { duration: 0.25 },
                 }}
-                className={`relative rounded-2xl border border-border/60 bg-card/80 backdrop-blur-sm p-6 shadow-sm cursor-default transition-colors hover:border-primary/40 ${
-                  feature.comingSoon ? "border-dashed border-primary/30" : ""
+                className={`relative rounded-2xl border p-6 cursor-default transition-colors hover:border-primary/40 ${
+                  feature.comingSoon
+                    ? "border-dashed border-primary/30 bg-white/40 backdrop-blur-sm"
+                    : "border-white/60 bg-white/70 backdrop-blur-sm shadow-sm"
                 }`}
               >
                 {feature.comingSoon && (
@@ -167,17 +162,18 @@ const KeyFeatures = () => {
                   {feature.title}
                 </h3>
 
-                <div className="space-y-1.5">
+                <ul className="space-y-2">
                   {feature.lines.map((line, j) => (
-                    <p
+                    <li
                       key={j}
-                      className="font-body text-sm sm:text-base leading-relaxed"
-                      style={{ color: "hsl(215 20% 45%)" }}
+                      className="flex items-start gap-2.5 font-body text-sm sm:text-base leading-relaxed"
+                      style={{ color: "hsl(215 20% 40%)" }}
                     >
+                      <Check className="w-4 h-4 shrink-0 mt-1" style={{ color: "hsl(172 66% 45%)" }} />
                       {line}
-                    </p>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </motion.div>
             );
           })}
