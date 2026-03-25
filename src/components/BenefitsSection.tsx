@@ -124,7 +124,7 @@ const BenefitsSection = () => {
           className="font-display font-bold text-center text-3xl sm:text-4xl lg:text-5xl leading-tight max-w-3xl mx-auto mb-14"
           style={{ color: "hsl(222 47% 11%)" }}
         >
-          Less Admin. <span className="text-gradient">More Patient Care.</span>
+          Unlock Your Clinic's <span className="text-gradient">Full Potential</span>
         </motion.h2>
 
         {/* Hero Card */}
