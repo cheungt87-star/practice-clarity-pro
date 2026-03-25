@@ -207,7 +207,8 @@ const BenefitsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
-          className="w-full rounded-2xl bg-gradient-to-r from-primary to-[hsl(260,45%,65%)] p-10 sm:p-14 text-center flex flex-col items-center"
+          className="w-full rounded-2xl p-10 sm:p-14 text-center flex flex-col items-center"
+          style={{ background: "linear-gradient(135deg, hsla(272, 37%, 70%, 1) 23%, hsla(240, 67%, 47%, 1) 100%)" }}
         >
           <h3 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-primary-foreground mb-3">
             Less Admin. <span className="opacity-90">More Patient Care.</span>
