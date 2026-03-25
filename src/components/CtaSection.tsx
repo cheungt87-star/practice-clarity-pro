@@ -13,7 +13,7 @@ const CtaSection = () => {
       <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] rounded-full bg-[hsl(260,45%,65%)]/8 blur-[120px] pointer-events-none" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
+      <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
         {/* Title */}
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
