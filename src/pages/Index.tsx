@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import PainPoints from "@/components/PainPoints";
 import KeyFeatures from "@/components/KeyFeatures";
 import TeamSection from "@/components/TeamSection";
+import BenefitsSection from "@/components/BenefitsSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -13,6 +14,7 @@ const Index = () => {
       <PainPoints />
       <KeyFeatures />
       <TeamSection />
+      <BenefitsSection />
       <Footer />
     </div>
   );
