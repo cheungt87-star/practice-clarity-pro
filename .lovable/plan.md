@@ -1,33 +1,33 @@
 
 
-## Plan: Visual Hierarchy & Consistent Typography
+## Plan: Add Interactive Key Features Section
 
-### Problem
-Titles lack visual punch — all are flat single-color text. Font usage (`font-display` vs `font-body`) isn't consistently applied across all components.
+### Overview
+Create a new `KeyFeatures` component that matches the hero's light gradient aesthetic, with interactive feature cards that respond to user interaction.
 
-### Changes
+### Design
+- Same light gradient background as hero (`linear-gradient(135deg, hsla(259, 42%, 86%, 1) ...`)
+- Section badge: "THE PRODUCT" with glowing dot (same pattern as hero badge)
+- Section title with gradient text on the accent line
+- **Interactive cards**: 7 feature cards in a responsive grid (2-3 columns on desktop, 1 on mobile). Each card has an icon, title, and description. Cards will:
+  - Animate in on scroll (staggered fade-up via framer-motion)
+  - Have a hover effect: scale up slightly, glow border, icon color shift
+  - The "Coming Soon" card (Policy GPT) gets a distinct badge/border treatment
+- Icons from lucide-react: `Calendar`, `LayoutDashboard`, `CheckSquare`, `Building2`, `Users`, `Lock`, `FileText`
 
-**1. Gradient titles (`src/index.css`)**
-- Add a reusable `.text-gradient` utility class with a teal-to-purple gradient (`from primary through a lighter teal to a soft lavender`) using `background-clip: text` and `text-fill-color: transparent`.
+### Files
+- **New**: `src/components/KeyFeatures.tsx` — full section component with motion animations
+- **Edit**: `src/pages/Index.tsx` — import and add `<KeyFeatures />` after `<PainPoints />`
 
-**2. Apply gradient to key section titles**
-
-- **Hero (`Hero.tsx`)**: Apply gradient to the "Without the Chaos." span (replace `text-primary` with the gradient class).
-- **Pain Points (`PainPoints.tsx`)**: Apply gradient to "Start Leading Your Surgery." line.
-- **Header (`Header.tsx`)**: Apply gradient to the "GP" text in the logo.
-
-**3. Font consistency audit**
-
-- **Hero.tsx**: Ensure `font-display` on h1, `font-body` on paragraph. Already correct.
-- **PainPoints.tsx**: Ensure section heading uses `font-display`, card body text uses `font-body` (add `font-body` to the `<p>` tags).
-- **Header.tsx**: Ensure nav links use `font-body`. Add explicit `font-body` to nav `<a>` tags.
-- **DashboardMockup.tsx**: Already uses `font-body` — correct.
-- **BookDemoDialog.tsx**: Add `font-body` to form labels and description text for consistency.
-
-### Files modified
-- `src/index.css` — add `.text-gradient` utility
-- `src/components/Hero.tsx` — gradient on accent line
-- `src/components/PainPoints.tsx` — gradient on second title line, add `font-body` to body text
-- `src/components/Header.tsx` — gradient on "GP", `font-body` on nav links
-- `src/components/BookDemoDialog.tsx` — `font-body` on description/labels
+### Component Structure
+```
+<section> (hero-matching gradient bg + grid overlay)
+  Badge: "THE PRODUCT"
+  Title: "Everything you need to run your practice — " + gradient "in one place"
+  Grid of 7 feature cards (motion.div with staggered whileInView)
+    Each card: icon box, title (font-display), two-line description (font-body)
+    Hover: scale(1.03), glow-border, elevated shadow
+    "Coming Soon" badge on Policy GPT card
+</section>
+```
 
