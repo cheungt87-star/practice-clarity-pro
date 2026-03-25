@@ -1,29 +1,23 @@
 
 
-## Align the CTA Gradient with the Site's Visual Identity
+## Improve CTA Box Text Hierarchy and Button Color
 
-The green gradient feels disconnected because the rest of the site uses a teal-to-purple palette. The fix is to swap it to match the site's signature gradient.
-
-### Current state
-- **Site palette**: teal primary (`hsl(172 66% 50%)`), purple accent (`hsl(260 45% 65%)`), with a consistent `text-gradient` of teal → cyan → purple
-- **Hero/Benefits backgrounds**: soft lavender-to-cyan-to-white (`hsla(259, 42%, 86%) → hsla(193, 37%, 85%) → hsla(0, 0%, 96%)`)
-- **CTA box**: green gradient that doesn't appear anywhere else on the site
+### Problem
+The CTA text all reads at similar visual weight (white on gradient), making it feel flat. The button is white, inconsistent with the green primary CTA buttons used elsewhere (Header, Hero).
 
 ### Changes to `src/components/BenefitsSection.tsx`
 
-1. **Replace the green gradient** with a teal-to-purple gradient that mirrors the site's accent palette:
-   ```
-   linear-gradient(135deg, hsla(172, 66%, 50%, 1) 0%, hsla(260, 45%, 65%, 1) 100%)
-   ```
+1. **Headline** (line 228-229): Make "Less Admin." bright white and bold, make "More Patient Care." use a light yellow/warm white tint (`text-yellow-100` or similar) instead of `opacity-90` to create colour contrast between the two phrases.
 
-2. **Update the button shadow glow** from green (`rgba(34,197,94,0.3)`) to teal (`rgba(45,212,191,0.3)`) to match.
+2. **Subheading** (line 231-232): "What are you waiting for?" — bump up to `text-2xl`, use full white (`text-white`) instead of `text-primary-foreground/70`.
 
-3. **Update the radial glow overlay** — keep the same white radial but it will naturally complement the new gradient.
+3. **Trust line** (line 234-235): Keep smaller and muted but use `text-white/70` for slightly better readability.
 
-Everything else (dot pattern, trust line, animation, layout) stays exactly as-is.
+4. **Button** (line 237-241): Change from white (`bg-white text-primary`) to the site's green primary style (`bg-primary text-primary-foreground`) matching the Hero and Header CTA buttons. Update shadow glow accordingly. Keep the larger size and arrow animation.
 
 ### Technical Details
-- Single file edit: `src/components/BenefitsSection.tsx`
-- Change the inline `style` background property on the CTA `motion.div`
-- Change the button's `shadow-[...]` arbitrary value
+- Single file: `src/components/BenefitsSection.tsx`
+- Button classes change from `bg-white text-primary` to `bg-primary text-primary-foreground shadow-lg shadow-primary/20`
+- Headline span changes from `opacity-90` to a warm accent colour
+- Subheading gets size and opacity bumps
 
