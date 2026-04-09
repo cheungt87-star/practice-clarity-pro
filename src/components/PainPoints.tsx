@@ -88,7 +88,7 @@ const PainPoints = () => {
         </div>
 
         {/* Bottom row — centered */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5 max-w-[calc(66.666%+0.625rem)] mx-auto lg:max-w-none lg:w-2/3 lg:mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5 md:max-w-[calc(66.666%+0.625rem)] md:mx-auto lg:max-w-none lg:w-2/3 lg:mx-auto">
           {painPoints.slice(3).map((point, index) => (
             <PainCard key={index + 3} point={point} index={index + 3} />
           ))}
