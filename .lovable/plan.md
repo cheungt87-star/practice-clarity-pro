@@ -1,24 +1,20 @@
 
 
-## Replace Video Placeholders with Feature Images
+## Problem
+The `AnimatePresence mode="wait"` causes the old image to fully exit (fade out + slide away) before the new image enters, creating a visible blank gap.
 
-### Changes to `src/components/KeyFeatures.tsx`
+## Solution
+Switch from `mode="wait"` to a crossfade approach where both images are stacked (absolute positioning) and the new image fades in on top of the old one simultaneously — no blank frame.
 
-1. **Add an `image` field to each feature** in the `features` array — use `/placeholder.svg` for all six features for now. This makes it easy to swap in real images later by just changing the path.
+### Changes (single file: `src/components/KeyFeatures.tsx`)
 
-2. **Replace the video placeholder area** (the play button, grid overlay, and video label) with an `<img>` tag that displays `activeFeature.image`. Keep the browser chrome (traffic light dots + title bar) as-is for visual framing.
+1. **Wrap the carousel area in a relative container with a fixed aspect ratio** to prevent layout collapse when images are absolutely positioned.
 
-3. **Image styling**: `w-full h-auto object-cover aspect-video` to maintain the same dimensions as the current video placeholder.
+2. **Remove `mode="wait"` from `AnimatePresence`** so exit and enter animations run simultaneously.
 
-### How to swap in real images later
+3. **Position `motion.img` as `absolute inset-0`** so both outgoing and incoming images overlap during the crossfade.
 
-Once you have real screenshots/mockups, either:
-- Upload them in chat and I'll wire them in
-- Place them in `public/` (e.g. `public/features/rota.png`) and update the paths
+4. **Simplify the transition to a pure opacity crossfade** — remove the `x` offset to avoid jarring horizontal jumps. Use a ~0.5s duration for smoothness.
 
-### Technical Details
-- Single file edit: `src/components/KeyFeatures.tsx`
-- Add `image: string` property to each feature object
-- Remove the play button `motion.div`, grid overlay, and bottom label
-- Add `<img src={activeFeature.image} alt={activeFeature.title} />` in their place
+5. **Preload images** by rendering hidden `<link rel="preload">` or simply rendering all images in a hidden container so the browser caches them, eliminating the blank flash from network loading on first view.
 
