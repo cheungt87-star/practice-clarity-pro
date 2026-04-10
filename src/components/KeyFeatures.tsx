@@ -87,6 +87,15 @@ const KeyFeatures = () => {
   const images = activeFeature.images;
   const hasMultiple = images.length > 1;
 
+  // Auto-advance carousel every 2 seconds
+  useEffect(() => {
+    if (!hasMultiple || expanded) return;
+    const timer = setInterval(() => {
+      setCarouselIndex((i) => (i + 1) % images.length);
+    }, 2000);
+    return () => clearInterval(timer);
+  }, [hasMultiple, expanded, images.length, activeTab]);
+
   return (
     <section
       className="relative overflow-hidden py-24 px-4 sm:px-6 lg:px-8"
