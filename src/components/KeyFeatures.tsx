@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, LayoutDashboard, CheckSquare, Building2, Users, FileText, Check, Expand, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const features = [
   {
@@ -86,6 +86,15 @@ const KeyFeatures = () => {
 
   const images = activeFeature.images;
   const hasMultiple = images.length > 1;
+
+  // Auto-advance carousel every 2 seconds
+  useEffect(() => {
+    if (!hasMultiple || expanded) return;
+    const timer = setInterval(() => {
+      setCarouselIndex((i) => (i + 1) % images.length);
+    }, 2000);
+    return () => clearInterval(timer);
+  }, [hasMultiple, expanded, images.length, activeTab]);
 
   return (
     <section
