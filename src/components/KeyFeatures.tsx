@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, LayoutDashboard, CheckSquare, Building2, Users, FileText, Check } from "lucide-react";
+import { Calendar, LayoutDashboard, CheckSquare, Building2, Users, FileText, Check, Expand, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useState } from "react";
@@ -74,6 +74,7 @@ const features = [
 
 const KeyFeatures = () => {
   const [activeTab, setActiveTab] = useState(features[0].id);
+  const [expanded, setExpanded] = useState(false);
   const activeFeature = features.find((f) => f.id === activeTab)!;
 
   return (
@@ -185,12 +186,19 @@ const KeyFeatures = () => {
                   </div>
 
                   {/* Right: Feature image */}
-                  <div className="rounded-2xl shadow-xl overflow-hidden">
+                  <div className="relative group rounded-2xl shadow-xl overflow-hidden cursor-pointer" onClick={() => setExpanded(true)}>
                     <img
                       src={activeFeature.image}
                       alt={activeFeature.title}
                       className="w-full h-auto block"
                     />
+                    <button
+                      className="absolute bottom-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-foreground/60 text-background text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm"
+                      onClick={(e) => { e.stopPropagation(); setExpanded(true); }}
+                    >
+                      <Expand className="w-3.5 h-3.5" />
+                      Expand
+                    </button>
                   </div>
                 </div>
               </motion.div>
@@ -198,6 +206,37 @@ const KeyFeatures = () => {
           </div>
         </Tabs>
       </div>
+
+      {/* Lightbox overlay */}
+      <AnimatePresence>
+        {expanded && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-6 cursor-pointer"
+            onClick={() => setExpanded(false)}
+          >
+            <motion.img
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              src={activeFeature.image}
+              alt={activeFeature.title}
+              className="max-w-[95vw] max-h-[90vh] rounded-xl shadow-2xl object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <button
+              className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+              onClick={() => setExpanded(false)}
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
