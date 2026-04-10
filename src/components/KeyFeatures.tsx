@@ -10,7 +10,7 @@ const features = [
     icon: Calendar,
     title: "Smart Rota Management",
     shortTitle: "Rotas",
-    image: "/features/rota.png",
+    images: ["/features/rota-1.png", "/features/rota-2.png", "/features/rota-3.png"],
     lines: [
       "Plan rotas by room, shift, and site — not just names on a list.",
       "Copy weeks instantly, validate staffing, and publish with confidence.",
@@ -21,7 +21,7 @@ const features = [
     icon: LayoutDashboard,
     title: "Live Practice Dashboard",
     shortTitle: "Dashboard",
-    image: "/placeholder.svg",
+    images: ["/placeholder.svg"],
     lines: [
       "Staff see exactly what they need for the day.",
       "Managers get full visibility across sites, shifts, and coverage — in real time.",
@@ -32,7 +32,7 @@ const features = [
     icon: CheckSquare,
     title: "Tasks & Compliance, Handled",
     shortTitle: "Tasks",
-    image: "/placeholder.svg",
+    images: ["/placeholder.svg"],
     lines: [
       "Automate recurring tasks like fridge checks, cleaning logs, and audits.",
       "Every action is tracked, time-stamped, and ready for inspection.",
@@ -43,7 +43,7 @@ const features = [
     icon: Building2,
     title: "Multi-Site, No Complexity",
     shortTitle: "Multi-Site",
-    image: "/placeholder.svg",
+    images: ["/placeholder.svg"],
     lines: [
       "Run multiple locations with different hours, facilities, and staffing rules — all from one system.",
     ],
@@ -53,7 +53,7 @@ const features = [
     icon: Users,
     title: "Team & Access Control",
     shortTitle: "Team",
-    image: "/placeholder.svg",
+    images: ["/placeholder.svg"],
     lines: [
       "Manage roles, permissions, and staffing without spreadsheets.",
       "Scale your team without losing control.",
@@ -64,7 +64,7 @@ const features = [
     icon: FileText,
     title: "Policy GPT",
     shortTitle: "Policy GPT",
-    image: "/placeholder.svg",
+    images: ["/placeholder.svg"],
     lines: [
       "Instant answers to SOPs and policies — tailored to your practice.",
     ],
