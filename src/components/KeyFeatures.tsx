@@ -10,7 +10,7 @@ const features = [
     icon: Calendar,
     title: "Smart Rota Management",
     shortTitle: "Rotas",
-    image: "/placeholder.svg",
+    image: "/features/rota.png",
     lines: [
       "Plan rotas by room, shift, and site — not just names on a list.",
       "Copy weeks instantly, validate staffing, and publish with confidence.",
