@@ -160,110 +160,100 @@ const KeyFeatures = () => {
             })}
           </TabsList>
 
-          {/* Tab content with animation */}
+          {/* Tab content */}
           <div className="relative min-h-[400px] sm:min-h-[350px]">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-              >
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                  {/* Left: Description */}
-                  <div className="space-y-5">
-                    <div className="flex items-center gap-3">
-                      <h3
-                        className="font-display text-2xl sm:text-3xl font-bold"
-                        style={{ color: "hsl(222 47% 11%)" }}
-                      >
-                        {activeFeature.title}
-                      </h3>
-                      {activeFeature.comingSoon && (
-                        <Badge
-                          variant="secondary"
-                          className="text-[10px] bg-primary/10 text-primary border-primary/20"
-                        >
-                          Coming Soon
-                        </Badge>
-                      )}
-                    </div>
-
-                    <ul className="space-y-3">
-                      {activeFeature.lines.map((line, j) => (
-                        <li
-                          key={j}
-                          className="flex items-start gap-3 font-body text-base leading-relaxed"
-                          style={{ color: "hsl(215 20% 40%)" }}
-                        >
-                          <Check className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "hsl(172 66% 45%)" }} />
-                          {line}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Right: Feature image carousel */}
-                  <div className="relative group rounded-2xl shadow-xl overflow-hidden">
-                    {/* Image */}
-                    <AnimatePresence mode="wait">
-                      <motion.img
-                        key={carouselIndex}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        src={images[carouselIndex]}
-                        alt={`${activeFeature.title} - ${carouselIndex + 1}`}
-                        className="w-full h-auto block cursor-pointer"
-                        onClick={() => { setLightboxIndex(carouselIndex); setExpanded(true); }}
-                      />
-                    </AnimatePresence>
-
-                    {/* Carousel arrows */}
-                    {hasMultiple && (
-                      <>
-                        <button
-                          className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-foreground/50 text-background opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm hover:bg-foreground/70"
-                          onClick={() => setCarouselIndex((i) => (i - 1 + images.length) % images.length)}
-                        >
-                          <ChevronLeft className="w-4 h-4" />
-                        </button>
-                        <button
-                          className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-foreground/50 text-background opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm hover:bg-foreground/70"
-                          onClick={() => setCarouselIndex((i) => (i + 1) % images.length)}
-                        >
-                          <ChevronRight className="w-4 h-4" />
-                        </button>
-                      </>
-                    )}
-
-                    {/* Dots */}
-                    {hasMultiple && (
-                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
-                        {images.map((_, i) => (
-                          <button
-                            key={i}
-                            onClick={() => setCarouselIndex(i)}
-                            className={`w-2 h-2 rounded-full transition-all ${i === carouselIndex ? "bg-white scale-125" : "bg-white/50"}`}
-                          />
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Expand CTA */}
-                    <button
-                      className="absolute bottom-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-foreground/60 text-background text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm"
-                      onClick={() => { setLightboxIndex(carouselIndex); setExpanded(true); }}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              {/* Left: Description (no animation on tab switch) */}
+              <div className="space-y-5">
+                <div className="flex items-center gap-3">
+                  <h3
+                    className="font-display text-2xl sm:text-3xl font-bold"
+                    style={{ color: "hsl(222 47% 11%)" }}
+                  >
+                    {activeFeature.title}
+                  </h3>
+                  {activeFeature.comingSoon && (
+                    <Badge
+                      variant="secondary"
+                      className="text-[10px] bg-primary/10 text-primary border-primary/20"
                     >
-                      <Expand className="w-3.5 h-3.5" />
-                      Expand
-                    </button>
-                  </div>
+                      Coming Soon
+                    </Badge>
+                  )}
                 </div>
-              </motion.div>
-            </AnimatePresence>
+
+                <ul className="space-y-3">
+                  {activeFeature.lines.map((line, j) => (
+                    <li
+                      key={j}
+                      className="flex items-start gap-3 font-body text-base leading-relaxed"
+                      style={{ color: "hsl(215 20% 40%)" }}
+                    >
+                      <Check className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "hsl(172 66% 45%)" }} />
+                      {line}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Right: Feature image carousel */}
+              <div className="relative group rounded-2xl shadow-xl overflow-hidden">
+                {/* Image with smooth slide transition */}
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.img
+                    key={`${activeTab}-${carouselIndex}`}
+                    initial={{ opacity: 0, x: 40 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -40 }}
+                    transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
+                    src={images[carouselIndex]}
+                    alt={`${activeFeature.title} - ${carouselIndex + 1}`}
+                    className="w-full h-auto block cursor-pointer"
+                    onClick={() => { setLightboxIndex(carouselIndex); setExpanded(true); }}
+                  />
+                </AnimatePresence>
+
+                {/* Carousel arrows */}
+                {hasMultiple && (
+                  <>
+                    <button
+                      className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-foreground/50 text-background opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm hover:bg-foreground/70"
+                      onClick={() => setCarouselIndex((i) => (i - 1 + images.length) % images.length)}
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <button
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-foreground/50 text-background opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm hover:bg-foreground/70"
+                      onClick={() => setCarouselIndex((i) => (i + 1) % images.length)}
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </>
+                )}
+
+                {/* Dots */}
+                {hasMultiple && (
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                    {images.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setCarouselIndex(i)}
+                        className={`w-2 h-2 rounded-full transition-all ${i === carouselIndex ? "bg-white scale-125" : "bg-white/50"}`}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {/* Expand CTA */}
+                <button
+                  className="absolute bottom-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-foreground/60 text-background text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm"
+                  onClick={() => { setLightboxIndex(carouselIndex); setExpanded(true); }}
+                >
+                  <Expand className="w-3.5 h-3.5" />
+                  Expand
+                </button>
+              </div>
+            </div>
           </div>
         </Tabs>
       </div>
