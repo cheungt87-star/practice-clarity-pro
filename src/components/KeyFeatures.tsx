@@ -12,8 +12,10 @@ const features = [
     shortTitle: "Rotas",
     images: ["/features/rota-1.png", "/features/rota-2.png", "/features/rota-3.png"],
     lines: [
-      "Plan rotas by room, shift, and site — not just names on a list.",
-      "Copy weeks instantly, validate staffing, and publish with confidence.",
+      "Plan rota across sites and weeks, assign staff with simple drag-and-drop",
+      "Filter quickly by site and role. Add cross-site and temp staff fast",
+      "Use AM, PM, full-day, or custom shifts. Copy days or full weeks in seconds",
+      "Catch errors before publishing. Staff notified once new rota complete.",
     ],
   },
   {
@@ -21,10 +23,18 @@ const features = [
     icon: LayoutDashboard,
     title: "Live Practice Dashboard",
     shortTitle: "Dashboard",
-    images: ["/placeholder.svg"],
+    images: [
+      "/features/dashboard-1.png",
+      "/features/dashboard-2.png",
+      "/features/dashboard-3.png",
+      "/features/dashboard-4.png",
+      "/features/dashboard-5.png",
+    ],
     lines: [
-      "Staff see exactly what they need for the day.",
-      "Managers get full visibility across sites, shifts, and coverage — in real time.",
+      "Full clarity on your shifts, assigned room, and on-call managers.",
+      "Plan ahead. See all completed rotas and print if needed.",
+      "Stay updated with upcoming and due tasks.",
+      "Visibility of daily patient capacity by site and session.",
     ],
   },
   {
@@ -32,10 +42,16 @@ const features = [
     icon: CheckSquare,
     title: "Tasks & Compliance, Handled",
     shortTitle: "Tasks",
-    images: ["/placeholder.svg"],
+    images: [
+      "/features/tasks-2.png",
+      "/features/tasks-1.png",
+      "/features/tasks-3.png",
+    ],
     lines: [
-      "Automate recurring tasks like fridge checks, cleaning logs, and audits.",
-      "Every action is tracked, time-stamped, and ready for inspection.",
+      "Create recurring tasks in seconds. Assign by person, job family, or all staff.",
+      "Roll tasks out across one or many sites. Auto-email assignees when tasks are created.",
+      "Filter and sort tasks fast to stay in control. Edit or retire tasks anytime.",
+      "Track status, due dates, and completions in one audit trail.",
     ],
   },
   {
@@ -43,9 +59,12 @@ const features = [
     icon: Building2,
     title: "Multi-Site, No Complexity",
     shortTitle: "Multi-Site",
-    images: ["/placeholder.svg"],
+    images: ["/features/multisite-1.png", "/features/multisite-2.png"],
     lines: [
-      "Run multiple locations with different hours, facilities, and staffing rules — all from one system.",
+      "Manage all your sites in one place.",
+      "Add new sites seamlessly as you grow.",
+      "Easily amend opening hours and operating days.",
+      "Add and assign clinical and non-clinical facilities and rooms.",
     ],
   },
   {
@@ -53,10 +72,16 @@ const features = [
     icon: Users,
     title: "Team & Access Control",
     shortTitle: "Team",
-    images: ["/placeholder.svg"],
+    images: [
+      "/features/team-1.png",
+      "/features/team-2.png",
+      "/features/team-3.png",
+    ],
     lines: [
-      "Manage roles, permissions, and staffing without spreadsheets.",
-      "Scale your team without losing control.",
+      "Manage all your staff in one place. Add, edit and remove users with ease.",
+      "Centrally manage user profiles, roles, and permissions in one place.",
+      "Global directory to easily contact all your staff members.",
+      "Organise staff by site, job families and job titles.",
     ],
   },
   {
@@ -64,13 +89,32 @@ const features = [
     icon: FileText,
     title: "Policy GPT",
     shortTitle: "Policy GPT",
-    images: ["/placeholder.svg"],
+    images: ["/features/policy-gpt-mockup.png"],
     lines: [
-      "Instant answers to SOPs and policies — tailored to your practice.",
+      "AI trained on all your practices' SOPs and policy documents.",
+      "Talk to the AI in natural language to quickly retrieve the latest SOP or policy.",
+      "Security: data is ring-fenced and never shared with external LLM providers.",
+      "The AI is trained and grounded only on your data — no hallucinations.",
     ],
     comingSoon: true,
   },
 ];
+
+const featureListContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.08 },
+  },
+};
+
+const featureListItemVariants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.35, ease: "easeOut" },
+  },
+};
 
 const KeyFeatures = () => {
   const [activeTab, setActiveTab] = useState(features[0].id);
@@ -86,6 +130,7 @@ const KeyFeatures = () => {
 
   const images = activeFeature.images;
   const hasMultiple = images.length > 1;
+  const listSpacingClass = activeFeature.lines.length > 4 ? "space-y-2" : "space-y-3";
 
   // Auto-advance carousel every 2 seconds
   useEffect(() => {
@@ -137,8 +182,8 @@ const KeyFeatures = () => {
           className="font-display font-bold text-center text-3xl sm:text-4xl lg:text-5xl leading-tight max-w-3xl mx-auto mb-12"
           style={{ color: "hsl(222 47% 11%)" }}
         >
-          Everything you need to run your practice —{" "}
-          <span className="text-gradient">in one place</span>
+          Everything you need to run your clincs, {" "}
+          <span className="text-gradient">effortlessly in a single app</span>
         </motion.h2>
 
         {/* Tabbed Feature Showcase */}
@@ -162,9 +207,9 @@ const KeyFeatures = () => {
 
           {/* Tab content */}
           <div className="relative min-h-[400px] sm:min-h-[350px]">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              {/* Left: Description (no animation on tab switch) */}
-              <div className="space-y-5">
+            <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-8 lg:gap-12 items-start">
+              {/* Copy: above screenshot on mobile; left column on lg */}
+              <div className="space-y-5 lg:max-w-[32rem]">
                 <div className="flex items-center gap-3">
                   <h3
                     className="font-display text-2xl sm:text-3xl font-bold"
@@ -182,22 +227,29 @@ const KeyFeatures = () => {
                   )}
                 </div>
 
-                <ul className="space-y-3">
+                <motion.ul
+                  key={activeTab}
+                  className={listSpacingClass}
+                  initial="hidden"
+                  animate="visible"
+                  variants={featureListContainerVariants}
+                >
                   {activeFeature.lines.map((line, j) => (
-                    <li
+                    <motion.li
                       key={j}
+                      variants={featureListItemVariants}
                       className="flex items-start gap-3 font-body text-base leading-relaxed"
                       style={{ color: "hsl(215 20% 40%)" }}
                     >
                       <Check className="w-5 h-5 shrink-0 mt-0.5" style={{ color: "hsl(172 66% 45%)" }} />
                       {line}
-                    </li>
+                    </motion.li>
                   ))}
-                </ul>
+                </motion.ul>
               </div>
 
-              {/* Right: Feature image carousel */}
-              <div className="relative group rounded-2xl shadow-xl overflow-hidden">
+              {/* Screenshot: below copy on mobile; sticky right column on lg */}
+              <div className="relative group rounded-2xl shadow-xl overflow-hidden lg:sticky lg:top-24 lg:self-start lg:w-full">
                 {/* Preload all images for this feature */}
                 {images.map((src, i) => (
                   <link key={src} rel="preload" as="image" href={src} />
