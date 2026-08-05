@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Amplitude-inspired light marketing system */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 221 87% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 0 0% 10%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 0 0% 54%;
+
+    --accent: 221 87% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 52%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 221 87% 53%;
+
+    --radius: 0.625rem;
+
+    --glow: 221 87% 53%;
+    --glow-brand: 252 85% 59%;
+    --brand-gradient: linear-gradient(90deg, #2b5cf5 0%, #8b3ff0 50%, #f0399e 100%);
+    --brand-gradient-radial: radial-gradient(circle at 30% 20%, #2b5cf5 0%, #6a3ff2 45%, #f0399e 100%);
+
+    --navy: 232 57% 12%;
+    --navy-raised: 233 49% 20%;
+    --surface: 220 14% 96%;
+    --surface-raised: 0 0% 100%;
+    --headline: 0 0% 0%;
+    --subtext: 0 0% 34%;
+
+    --on-light-heading: 0 0% 0%;
+    --on-light-body: 0 0% 34%;
+    --on-light-muted: 0 0% 54%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 10%;
+    --sidebar-primary: 221 87% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 221 87% 53%;
+
+    --section-sand: #faf7f2;
+    --section-pricing: #eef3ff;
+    --section-hero: linear-gradient(160deg, #fbfbfc 0%, #f2f3f5 55%, #eceef1 100%);
+    --section-pad: 96px;
+    --section-pad-tight: 64px;
+
+    --font-display: "Space Grotesk", system-ui, sans-serif;
+    --font-hero: "Barlow Condensed", system-ui, sans-serif;
+    --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-hero);
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .bg-brand-signature {
+    background: var(--brand-gradient);
+  }
+
+  .bg-brand-radial {
+    background: var(--brand-gradient-radial);
+  }
+
+  .bg-section-sand {
+    background-color: var(--section-sand);
+  }
+
+  .bg-section-pricing {
+    background-color: var(--section-pricing);
+  }
+
+  .bg-section-hero {
+    background: var(--section-hero);
+  }
+
+  .bg-navy {
+    background-color: hsl(var(--navy));
+  }
+
+  .bg-navy-raised {
+    background-color: hsl(var(--navy-raised));
+  }
+
+  .text-navy {
+    color: hsl(var(--navy));
+  }
+
+  .text-gradient {
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Brand signature gradient (indigo → cyan) for headline emphasis */
+  .text-gradient-brand {
+    background: linear-gradient(135deg, #5B4FFF 0%, #00D9F7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gradient-strip {
+    height: 64px;
+    background: var(--brand-gradient);
+  }
+
+  .media-frame {
+    border-radius: 1.25rem;
+    padding: 0.625rem;
+    background-image:
+      radial-gradient(circle, rgba(255, 255, 255, 0.25) 1.5px, transparent 1.5px),
+      var(--frame-gradient, var(--brand-gradient-radial));
+    background-size: 20px 20px, 100% 100%;
+  }
+
+  .media-frame--hero {
+    border-radius: 1.25rem;
+    padding: 0.625rem;
+    background-size: 20px 20px, 100% 100%;
+  }
+
+  .scroll-mt-nav {
+    scroll-margin-top: 5.5rem;
+  }
+
+  .animate-pricing-fade-slide {
+    animation: pricing-fade-slide 0.25s ease;
+  }
+}
+
+@keyframes pricing-fade-slide {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-pricing-fade-slide {
+    animation: none;
+  }
+}

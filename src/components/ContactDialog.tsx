@@ -10,7 +10,7 @@ const ContactDialog = ({ open, onOpenChange }: ContactDialogProps) => {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md border-neutral-200 bg-white text-neutral-900 shadow-xl">
         <DialogHeader>
-          <DialogTitle className="font-display text-xl text-neutral-900">Contact</DialogTitle>
+          <DialogTitle className="font-hero text-xl font-bold uppercase leading-[1.08] tracking-tight text-neutral-900">Contact</DialogTitle>
           <DialogDescription className="font-body text-left text-neutral-600">
             For general enquiries please e-mail{" "}
             <a

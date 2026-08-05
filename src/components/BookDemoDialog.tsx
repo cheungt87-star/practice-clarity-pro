@@ -1,3 +1,6 @@
+"use client";
+
+import Link from "next/link";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -5,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
-import PrivacyPolicyDialog from "./PrivacyPolicyDialog";
+import { trackDemoBooking } from "@/lib/analytics";
 
 interface BookDemoDialogProps {
   open: boolean;
@@ -17,6 +20,7 @@ const emptyForm = {
   lastName: "",
   jobTitle: "",
   email: "",
+  siteCount: "",
   painPoint: "",
   companyWebsite: "",
 };
@@ -24,15 +28,13 @@ const emptyForm = {
 const BookDemoDialog = ({ open, onOpenChange }: BookDemoDialogProps) => {
   const [form, setForm] = useState(emptyForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [privacyOpen, setPrivacyOpen] = useState(false);
-
   const update = (field: keyof typeof form, value: string) =>
     setForm((prev) => ({ ...prev, [field]: value }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT;
+    const formspreeEndpoint = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT;
     if (!formspreeEndpoint) {
       toast({
         title: "Form is not configured",
@@ -58,9 +60,10 @@ const BookDemoDialog = ({ open, onOpenChange }: BookDemoDialogProps) => {
       }
 
       toast({
-        title: "E-mail sent!",
-        description: "The SuperGP team will be in touch shortly.",
+        title: "We got your request",
+        description: "We will be in touch shortly.",
       });
+      trackDemoBooking();
       onOpenChange(false);
       setForm(emptyForm);
     } catch {
@@ -79,9 +82,9 @@ const BookDemoDialog = ({ open, onOpenChange }: BookDemoDialogProps) => {
       <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto border-neutral-200 bg-white text-neutral-900 shadow-xl">
           <DialogHeader>
-            <DialogTitle className="font-display text-xl text-neutral-900">Book a Demo</DialogTitle>
+            <DialogTitle className="font-hero text-xl font-bold uppercase leading-[1.08] tracking-tight text-neutral-900">Start my free trial</DialogTitle>
             <DialogDescription className="font-body text-left text-neutral-600">
-              See how SuperGP can transform your practice. Fill in your details and we&apos;ll be in touch.
+              Fill in your details and we&apos;ll get your free trial set up.
             </DialogDescription>
           </DialogHeader>
 
@@ -111,6 +114,19 @@ const BookDemoDialog = ({ open, onOpenChange }: BookDemoDialogProps) => {
             </div>
 
             <div className="space-y-1.5">
+              <Label htmlFor="siteCount">How many sites do you have? *</Label>
+              <Input
+                id="siteCount"
+                type="number"
+                min={1}
+                required
+                value={form.siteCount}
+                onChange={(e) => update("siteCount", e.target.value)}
+                placeholder="e.g. 4"
+              />
+            </div>
+
+            <div className="space-y-1.5">
               <Label htmlFor="painPoint">What is your biggest pain point right now? *</Label>
               <Textarea
                 id="painPoint"
@@ -134,25 +150,19 @@ const BookDemoDialog = ({ open, onOpenChange }: BookDemoDialogProps) => {
             />
 
             <p className="text-xs leading-relaxed text-neutral-500">
-              By submitting this form, you agree that we may contact you about your demo request. We use your details only for that purpose and do not sell them. See our{" "}
-              <button
-                type="button"
-                onClick={() => setPrivacyOpen(true)}
-                className="text-neutral-700 underline underline-offset-2 hover:text-neutral-900"
-              >
+              By submitting this form, you agree that we may contact you about your free trial. We use your details only for that purpose and do not sell them. See our{" "}
+              <Link href="/privacy" className="text-neutral-700 underline underline-offset-2 hover:text-neutral-900">
                 Privacy Policy
-              </button>{" "}
+              </Link>{" "}
               for more information.
             </p>
 
             <Button type="submit" disabled={isSubmitting} className="w-full font-display font-semibold text-base py-5">
-              {isSubmitting ? "Sending..." : "Book now"}
+              {isSubmitting ? "Sending..." : "Start free trial"}
             </Button>
           </form>
         </DialogContent>
       </Dialog>
-
-      <PrivacyPolicyDialog open={privacyOpen} onOpenChange={setPrivacyOpen} />
     </>
   );
 };

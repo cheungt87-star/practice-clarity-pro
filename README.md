@@ -1,23 +1,45 @@
 # SuperGP Marketing Site
 
-## Contact Form With Formspree
+Next.js marketing site for [supergpapp.co.uk](https://www.supergpapp.co.uk).
 
-The demo/contact form submits directly to a Formspree endpoint from the frontend.
+## Development
 
-### Environment Variables
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## Production Build
+
+```bash
+npm run build
+npm start
+```
+
+## Environment Variables
 
 Copy `.env.example` to `.env` for local testing:
 
-- `VITE_FORMSPREE_ENDPOINT`: your Formspree endpoint (for example `https://formspree.io/f/abc123xy`).
+- `NEXT_PUBLIC_FORMSPREE_ENDPOINT`: Formspree endpoint for demo bookings (e.g. `https://formspree.io/f/abc123xy`)
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID`: Google Analytics 4 measurement ID (optional)
+- `NEXT_PUBLIC_GSC_VERIFICATION`: Google Search Console verification token (optional)
 
-### Formspree Setup
+Set the same variables in Vercel for production.
+
+## Contact Form (Formspree)
+
+The demo form submits directly to Formspree from the frontend.
 
 1. Create a form in Formspree.
-2. Set the notification destination to your inbox (for example `info@supergpapp.co.uk`).
-3. Copy your form endpoint into `VITE_FORMSPREE_ENDPOINT`.
-4. Redeploy after setting the environment variable in your host.
+2. Set the notification destination to your inbox (e.g. `info@supergpapp.co.uk`).
+3. Copy your form endpoint into `NEXT_PUBLIC_FORMSPREE_ENDPOINT`.
+4. Redeploy after setting the environment variable in Vercel.
 
-### Spam Protection
+## SEO
 
-- The contact form includes a hidden honeypot field to reduce bot submissions.
-- You can enable extra protection in Formspree dashboard settings if needed.
+- Sitemap: `/sitemap.xml` — homepage, pricing, privacy, `/features/*`, `/for/*`, `/compare/*`, and `/about`
+- Robots: `/robots.txt`
+- Structured data: Organization + SoftwareApplication on homepage; page-level FAQ / SoftwareApplication / Person on content pages
+- `/contact` ships real content but stays `noindex` (intentional — not a ranking target)

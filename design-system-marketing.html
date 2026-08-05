@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SuperGP Marketing — Design System v2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --c-electric:#5B4FFF;
+    --c-cyan:#00D9F7;
+    --c-lime:#A8FF3E;
+    --c-violet:#8B5CF6;
+    --c-warning:#FFB830;
+    --c-error:#FF4D6A;
+    --g-brand: linear-gradient(135deg,#5B4FFF 0%, #00D9F7 100%);
+    --g-hero: radial-gradient(circle at 15% 20%, rgba(91,79,255,0.20), transparent 45%), radial-gradient(circle at 85% 0%, rgba(0,217,247,0.14), transparent 40%), #070B14;
+    --c-bg:#070B14;
+    --c-surface-1:#0D1422;
+    --c-surface-2:#121929;
+    --c-surface-3:#1A2236;
+    --c-border: rgba(255,255,255,0.08);
+    --c-border-bright: rgba(255,255,255,0.16);
+    --c-text-primary:#F0F4FF;
+    --c-text-secondary: rgba(240,244,255,0.55);
+    --c-text-muted: rgba(240,244,255,0.30);
+    --f-sans:'Inter',system-ui,-apple-system,sans-serif;
+    --f-mono:'JetBrains Mono','Fira Code',monospace;
+    --r-lg:.75rem; --r-xl:1rem; --r-2xl:1.25rem; --r-full:9999px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--f-sans);
+    background:var(--c-bg);
+    color:var(--c-text-primary);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+  .wrap{max-width:1040px;margin:0 auto;padding:4rem 1.5rem 6rem;}
+  section{padding-top:4rem;border-top:1px solid var(--c-border);margin-top:4rem;}
+  section:first-of-type{border-top:none;margin-top:0;padding-top:0;}
+  .eyebrow{font-family:var(--f-mono);font-size:.75rem;color:var(--c-electric);letter-spacing:.05em;display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem;}
+  .eyebrow::before{content:'';width:20px;height:2px;background:var(--c-electric);display:block;}
+  h2{font-size:1.75rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:.5rem;}
+  .desc{color:var(--c-text-secondary);max-width:600px;margin-bottom:2rem;line-height:1.7;}
+
+  /* HERO */
+  .hero{
+    background:var(--g-hero);
+    border:1px solid var(--c-border-bright);
+    border-radius:var(--r-2xl);
+    padding:4rem 3rem;
+    text-align:left;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-title{font-size:clamp(2.2rem,5vw,3.75rem);font-weight:900;letter-spacing:-0.04em;line-height:1.05;margin-bottom:1.25rem;}
+  .hero-title .g-text{background:var(--g-brand);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .hero-sub{font-size:1.125rem;color:var(--c-text-secondary);max-width:480px;margin-bottom:1.75rem;}
+  .hero-pills{display:flex;gap:.5rem;flex-wrap:wrap;}
+  .pill{font-family:var(--f-mono);font-size:.72rem;color:var(--c-text-muted);background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-full);padding:.3rem .7rem;}
+
+  /* LOGO */
+  .logo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;}
+  .logo-card{background:var(--c-surface-1);border:1px solid var(--c-border);border-radius:var(--r-2xl);padding:2rem 1rem 1.25rem;display:flex;flex-direction:column;align-items:center;gap:1rem;}
+  .logo-card.on-white{background:#fff;}
+  .logo-card.on-dark-deep{background:#020408;}
+  .logo-label{font-size:.8rem;font-weight:700;}
+  .logo-sub{font-size:.7rem;color:var(--c-text-muted);}
+  .logo-card.on-white .logo-sub, .logo-card.on-white .logo-label{color:#475569;}
+  .logo-card.on-white .logo-label{color:#0F172A;}
+
+  .retired-row{display:flex;gap:1rem;align-items:center;margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(255,77,106,0.06);border:1px solid rgba(255,77,106,0.2);border-radius:var(--r-xl);}
+  .retired-swatch{width:28px;height:28px;border-radius:6px;flex-shrink:0;}
+  .retired-text{font-size:.85rem;color:var(--c-text-secondary);}
+  .retired-text b{color:var(--c-error);font-weight:700;}
+  .strike{text-decoration:line-through;opacity:.6;}
+
+  /* COLOUR */
+  .color-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.9rem;}
+  .swatch{border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--c-border);background:var(--c-surface-1);}
+  .swatch-color{height:64px;}
+  .swatch-info{padding:.7rem .8rem .9rem;}
+  .swatch-name{font-size:.85rem;font-weight:700;}
+  .swatch-hex{font-family:var(--f-mono);font-size:.72rem;color:var(--c-electric);margin-top:2px;}
+  .swatch-use{font-size:.72rem;color:var(--c-text-muted);margin-top:.25rem;}
+  .subtitle{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c-text-muted);margin:2rem 0 .9rem;}
+  .subtitle:first-child{margin-top:0;}
+
+  /* TYPE */
+  .type-specimen{background:var(--c-surface-1);border:1px solid var(--c-border);border-radius:var(--r-2xl);overflow:hidden;}
+  .type-row{display:flex;align-items:baseline;gap:1.5rem;padding:1.1rem 1.4rem;border-bottom:1px solid var(--c-border);}
+  .type-row:last-child{border-bottom:none;}
+  .type-meta{width:150px;flex-shrink:0;}
+  .type-token{font-family:var(--f-mono);font-size:.72rem;color:var(--c-electric);}
+  .type-spec{font-size:.7rem;color:var(--c-text-muted);margin-top:2px;}
+
+  /* BUTTONS */
+  .demo-panel{background:var(--c-surface-1);border:1px solid var(--c-border);border-radius:var(--r-2xl);padding:1.5rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-bottom:1rem;}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-weight:600;font-size:.9rem;border:none;cursor:pointer;border-radius:var(--r-lg);padding:.75rem 1.5rem;position:relative;overflow:hidden;text-decoration:none;}
+  .btn-primary{background:var(--c-electric);color:#fff;box-shadow:0 0 0 rgba(91,79,255,0);transition:box-shadow .2s,transform .2s;}
+  .btn-primary:hover{box-shadow:0 0 24px rgba(91,79,255,.45),0 0 60px rgba(91,79,255,.18);transform:translateY(-1px);}
+  .btn-ghost{background:transparent;color:var(--c-text-primary);border:1px solid var(--c-border-bright);}
+  .btn-ghost:hover{background:var(--c-surface-3);}
+  .btn-gradient{background:var(--g-brand);color:#fff;}
+  .cta-shimmer{position:absolute;inset:-220% -60%;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);transform:translateX(-55%) rotate(8deg);opacity:.85;mix-blend-mode:screen;pointer-events:none;animation:shimmer-sweep 2.8s ease-in-out infinite;}
+  @keyframes shimmer-sweep{0%{transform:translateX(-62%) rotate(8deg);}55%{transform:translateX(58%) rotate(8deg);}100%{transform:translateX(58%) rotate(8deg);}}
+
+  /* CARDS */
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;}
+  .card{background:var(--c-surface-1);border:1px solid var(--c-border);border-radius:var(--r-2xl);padding:1.5rem;transition:border-color .2s,transform .2s,box-shadow .2s;}
+  .card:hover{border-color:var(--c-border-bright);transform:translateY(-2px);}
+  .card-glow{background:linear-gradient(135deg, rgba(91,79,255,.10) 0%, rgba(0,217,247,.06) 100%);border-color:rgba(91,79,255,.22);}
+  .card-glow:hover{box-shadow:0 0 24px rgba(91,79,255,.30);}
+  .card-title{font-weight:700;margin-bottom:.35rem;letter-spacing:-.01em;}
+  .card-body{font-size:.88rem;color:var(--c-text-secondary);}
+  .metric-value{font-size:2.1rem;font-weight:800;letter-spacing:-0.03em;background:var(--g-brand);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .metric-label{font-size:.72rem;color:var(--c-text-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.4rem;}
+
+  /* BADGES */
+  .badge{display:inline-flex;align-items:center;gap:.3rem;font-size:.72rem;font-weight:600;padding:.25rem .65rem;border-radius:var(--r-full);}
+  .badge-electric{background:rgba(91,79,255,.14);color:#B8B0FF;border:1px solid rgba(91,79,255,.28);}
+  .badge-cyan{background:rgba(0,217,247,.12);color:#8CEBFA;border:1px solid rgba(0,217,247,.26);}
+  .badge-lime{background:rgba(168,255,62,.12);color:#C4FF8C;border:1px solid rgba(168,255,62,.26);}
+  .badge-gradient{background:var(--g-brand);color:#fff;}
+
+  code{font-family:var(--f-mono);font-size:.85em;background:rgba(91,79,255,.12);padding:.1em .4em;border-radius:.25rem;color:#B8B0FF;}
+  footer{text-align:center;font-family:var(--f-mono);font-size:.72rem;color:var(--c-text-muted);padding-top:4rem;margin-top:4rem;border-top:1px solid var(--c-border);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <section>
+    <div class="hero">
+      <svg width="52" height="52" viewBox="0 0 200 200" style="margin-bottom:1.5rem;">
+        <polygon points="175,100 137.5,165 62.5,165 25,100 62.5,35 137.5,35" fill="none" stroke="url(#heroGrad)" stroke-width="10" stroke-linejoin="round"/>
+        <path d="M 128,58 C 98,58 98,92 128,100 C 158,108 158,142 128,142" fill="none" stroke="url(#heroGrad)" stroke-width="10" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="heroGrad" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#5B4FFF"/>
+            <stop offset="1" stop-color="#00D9F7"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="eyebrow">SuperGP / Marketing Design System / v2.0</div>
+      <h1 class="hero-title">Run your practice,<br/><span class="g-text">without the chaos.</span></h1>
+      <p class="hero-sub">Disruptive, tech-first, simple — a deliberate break from NHS-blue and legacy healthcare software. One electric palette, one typeface, everywhere on this site.</p>
+      <div class="hero-pills">
+        <span class="pill">Dark-first</span>
+        <span class="pill">Electric Indigo → Cyan</span>
+        <span class="pill">Inter + JetBrains Mono</span>
+        <span class="pill">WCAG AA</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGO -->
+  <section id="logo">
+    <div class="eyebrow">// 01 identity</div>
+    <h2>Logo system</h2>
+    <p class="desc">Hexagon badge with an implicit "S" curve in negative space — concept retained from the original creative brief, recoloured from teal/coral to the electric brand palette.</p>
+
+    <div class="logo-grid">
+      <div class="logo-card">
+        <svg width="80" height="80" viewBox="0 0 200 200">
+          <polygon points="175,100 137.5,165 62.5,165 25,100 62.5,35 137.5,35" fill="none" stroke="url(#g1)" stroke-width="11" stroke-linejoin="round"/>
+          <path d="M 128,58 C 98,58 98,92 128,100 C 158,108 158,142 128,142" fill="none" stroke="url(#g1)" stroke-width="11" stroke-linecap="round"/>
+          <defs><linearGradient id="g1" x1="0" y1="0" x2="200" y2="200" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#5B4FFF"/><stop offset="1" stop-color="#00D9F7"/></linearGradient></defs>
+        </svg>
+        <div class="logo-label">Two-tone gradient</div>
+        <div class="logo-sub">Primary — marketing hero, social</div>
+      </div>
+      <div class="logo-card">
+        <svg width="80" height="80" viewBox="0 0 200 200">
+          <polygon points="175,100 137.5,165 62.5,165 25,100 62.5,35 137.5,35" fill="none" stroke="#5B4FFF" stroke-width="11" stroke-linejoin="round"/>
+          <path d="M 128,58 C 98,58 98,92 128,100 C 158,108 158,142 128,142" fill="none" stroke="#5B4FFF" stroke-width="11" stroke-linecap="round"/>
+        </svg>
+        <div class="logo-label">Solid Electric Indigo</div>
+        <div class="logo-sub">Single-colour digital use</div>
+      </div>
+      <div class="logo-card on-white">
+        <svg width="80" height="80" viewBox="0 0 200 200">
+          <polygon points="175,100 137.5,165 62.5,165 25,100 62.5,35 137.5,35" fill="none" stroke="#0F172A" stroke-width="11" stroke-linejoin="round"/>
+          <path d="M 128,58 C 98,58 98,92 128,100 C 158,108 158,142 128,142" fill="none" stroke="#0F172A" stroke-width="11" stroke-linecap="round"/>
+        </svg>
+        <div class="logo-label">Black on white</div>
+        <div class="logo-sub">Print / limited colour</div>
+      </div>
+      <div class="logo-card on-dark-deep">
+        <svg width="80" height="80" viewBox="0 0 200 200">
+          <polygon points="175,100 137.5,165 62.5,165 25,100 62.5,35 137.5,35" fill="none" stroke="#F0F4FF" stroke-width="11" stroke-linejoin="round"/>
+          <path d="M 128,58 C 98,58 98,92 128,100 C 158,108 158,142 128,142" fill="none" stroke="#F0F4FF" stroke-width="11" stroke-linecap="round"/>
+        </svg>
+        <div class="logo-label">White on dark</div>
+        <div class="logo-sub">Favicon, dark UI, merch</div>
+      </div>
+    </div>
+
+    <div class="retired-row">
+      <div class="retired-swatch" style="background:#0F766E;"></div>
+      <div class="retired-swatch" style="background:#F4713D;"></div>
+      <div class="retired-text"><b>Retired:</b> the original <span class="strike">teal (#0F766E) + coral</span> colourway from the Logo Creative Brief. Hexagon + S-curve concept, stroke rules, and clear-space specs from that brief still apply — only the colour changes.</div>
+    </div>
+  </section>
+
+  <!-- COLOUR -->
+  <section id="colour">
+    <div class="eyebrow">// 01 identity</div>
+    <h2>Colour system</h2>
+    <p class="desc">Dark surfaces by default. Electric accents carry all interactive, informational, and success moments — never NHS blue, never generic corporate blue, never the retired teal/coral/warm-sand set.</p>
+
+    <div class="subtitle">Brand colours</div>
+    <div class="color-grid">
+      <div class="swatch"><div class="swatch-color" style="background:var(--g-brand);"></div><div class="swatch-info"><div class="swatch-name">Signature gradient</div><div class="swatch-hex">#5B4FFF → #00D9F7</div><div class="swatch-use">Hero text, CTAs, logo</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#5B4FFF;"></div><div class="swatch-info"><div class="swatch-name">Electric Indigo</div><div class="swatch-hex">#5B4FFF</div><div class="swatch-use">Primary — CTAs, focus</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#00D9F7;"></div><div class="swatch-info"><div class="swatch-name">Electric Cyan</div><div class="swatch-hex">#00D9F7</div><div class="swatch-use">Accent, info, links</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#A8FF3E;"></div><div class="swatch-info"><div class="swatch-name">Electric Lime</div><div class="swatch-hex">#A8FF3E</div><div class="swatch-use">Success, proof points</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#8B5CF6;"></div><div class="swatch-info"><div class="swatch-name">Soft Violet</div><div class="swatch-hex">#8B5CF6</div><div class="swatch-use">AI / Policy GPT</div></div></div>
+    </div>
+
+    <div class="subtitle">Semantic</div>
+    <div class="color-grid">
+      <div class="swatch"><div class="swatch-color" style="background:#FFB830;"></div><div class="swatch-info"><div class="swatch-name">Warm Amber</div><div class="swatch-hex">#FFB830</div><div class="swatch-use">Warnings</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#FF4D6A;"></div><div class="swatch-info"><div class="swatch-name">Hot Red</div><div class="swatch-hex">#FF4D6A</div><div class="swatch-use">Errors, critical</div></div></div>
+    </div>
+
+    <div class="subtitle">Dark surfaces</div>
+    <div class="color-grid">
+      <div class="swatch"><div class="swatch-color" style="background:#070B14;border-bottom:1px solid var(--c-border);"></div><div class="swatch-info"><div class="swatch-name">BG</div><div class="swatch-hex">#070B14</div><div class="swatch-use">Deepest background</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#0D1422;"></div><div class="swatch-info"><div class="swatch-name">Surface 1</div><div class="swatch-hex">#0D1422</div><div class="swatch-use">Cards, panels</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#121929;"></div><div class="swatch-info"><div class="swatch-name">Surface 2</div><div class="swatch-hex">#121929</div><div class="swatch-use">Elevated panels</div></div></div>
+      <div class="swatch"><div class="swatch-color" style="background:#1A2236;"></div><div class="swatch-info"><div class="swatch-name">Surface 3</div><div class="swatch-hex">#1A2236</div><div class="swatch-use">Hover states</div></div></div>
+    </div>
+  </section>
+
+  <!-- TYPE -->
+  <section id="type">
+    <div class="eyebrow">// 01 identity</div>
+    <h2>Typography</h2>
+    <p class="desc">Inter, everywhere — headlines, body, UI. JetBrains Mono is used sparingly for eyebrows and stat callouts. Space Grotesk, Chakra Petch, and Satoshi are retired from this site.</p>
+    <div class="type-specimen">
+      <div class="type-row"><div class="type-meta"><div class="type-token">display</div><div class="type-spec">60px · 900 · −0.04em</div></div><div style="font-size:clamp(1.8rem,3.5vw,3.75rem);font-weight:900;letter-spacing:-0.04em;line-height:1.05;">Run your practice</div></div>
+      <div class="type-row"><div class="type-meta"><div class="type-token">h1</div><div class="type-spec">40px · 800 · −0.035em</div></div><div style="font-size:2.5rem;font-weight:800;letter-spacing:-0.035em;">Built for real practice ops</div></div>
+      <div class="type-row"><div class="type-meta"><div class="type-token">h2</div><div class="type-spec">32px · 800 · −0.03em</div></div><div style="font-size:2rem;font-weight:800;letter-spacing:-0.03em;">Designed by GPs. Engineered by experts.</div></div>
+      <div class="type-row"><div class="type-meta"><div class="type-token">body-lg</div><div class="type-spec">18px · 400</div></div><div style="font-size:1.125rem;color:var(--c-text-secondary);">Cut admin by up to 70%. Replace spreadsheets with one connected system.</div></div>
+      <div class="type-row"><div class="type-meta"><div class="type-token">mono / eyebrow</div><div class="type-spec">12px · mono · 0.05em</div></div><div style="font-family:var(--f-mono);font-size:.75rem;color:var(--c-electric);letter-spacing:.05em;">--c-electric: #5B4FFF; /* primary */</div></div>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section id="buttons">
+    <div class="eyebrow">// 02 components</div>
+    <h2>CTAs</h2>
+    <p class="desc">Primary CTAs carry a subtle shimmer sweep and glow on hover — the marketing site's signature motion moment, built on the electric palette rather than a separate colour system.</p>
+    <div class="demo-panel">
+      <button class="btn btn-primary">Book a demo<span class="cta-shimmer"></span></button>
+      <button class="btn btn-gradient">See SuperGP in action</button>
+      <button class="btn btn-ghost">Explore feature overview</button>
+    </div>
+  </section>
+
+  <!-- CARDS -->
+  <section id="cards">
+    <div class="eyebrow">// 02 components</div>
+    <h2>Cards &amp; proof points</h2>
+    <p class="desc">Feature storytelling and metric proof points, on-token.</p>
+    <div class="cards-grid">
+      <div class="card card-glow">
+        <div class="card-title">Policy GPT</div>
+        <div class="card-body">A private LLM trained on your own SOPs. Zero external exposure, zero hallucinations.</div>
+      </div>
+      <div class="card">
+        <div class="metric-label">Admin time saved</div>
+        <div class="metric-value">70%</div>
+      </div>
+      <div class="card">
+        <div class="metric-label">Audit compliance</div>
+        <div class="metric-value">100%</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BADGES -->
+  <section id="badges">
+    <div class="eyebrow">// 02 components</div>
+    <h2>Badges</h2>
+    <div class="demo-panel">
+      <span class="badge badge-electric">Active</span>
+      <span class="badge badge-cyan">Audit ready</span>
+      <span class="badge badge-lime">↑ 70% saved</span>
+      <span class="badge badge-gradient">✦ SuperGP AI</span>
+    </div>
+  </section>
+
+  <footer>SuperGP Marketing Design System v2.0 · August 2026 · Disruptive. Tech-first. Simple.</footer>
+</div>
+</body>
+</html>

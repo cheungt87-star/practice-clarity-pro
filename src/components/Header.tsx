@@ -1,94 +1,126 @@
-import { motion } from "framer-motion";
-import BookDemoDialog from "./BookDemoDialog";
-import { useId, useState } from "react";
+"use client";
 
-/** Minimal lockup: viewport-style mark + wordmark */
-function SuperGPLogo() {
-  const rawId = useId();
-  const gid = `sg-logo-${rawId.replace(/:/g, "")}`;
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useDemoDialog } from "@/components/demo-dialog-context";
 
-  return (
-    <div className="flex items-center gap-1.5 sm:gap-2 select-none">
-      <svg
-        width="22"
-        height="22"
-        viewBox="0 0 28 28"
-        className="h-[22px] w-[22px] shrink-0 sm:h-6 sm:w-6 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)]"
-        aria-hidden
-      >
-        <defs>
-          <linearGradient id={gid} x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="hsl(172 70% 52%)" />
-            <stop offset="52%" stopColor="hsl(180 55% 65%)" />
-            <stop offset="100%" stopColor="hsl(260 50% 72%)" />
-          </linearGradient>
-        </defs>
-        {/* Corner brackets — suggests focus / dashboard viewport */}
-        <path
-          d="M6 9V6h3M19 6h3v3M6 19v3h3M22 19v3h-3"
-          fill="none"
-          stroke={`url(#${gid})`}
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <circle cx="14" cy="14" r="2" fill={`url(#${gid})`} />
-      </svg>
-      <span className="font-display text-base font-bold leading-none tracking-tight text-white sm:text-lg">
-        Super<span className="text-gradient">GP</span>
-      </span>
-    </div>
-  );
-}
+type HeaderProps = {
+  className?: string;
+};
 
-const Header = () => {
-  const [demoOpen, setDemoOpen] = useState(false);
+const Header = ({ className }: HeaderProps) => {
+  const pathname = usePathname();
+  const { openDemo } = useDemoDialog();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const isHome = pathname === "/";
+
+  const productHref = isHome ? "#features" : "/#features";
+  const pricingHref = isHome ? "#pricing" : "/pricing";
+  const faqHref = isHome ? "#faq" : "/#faq";
+
+  const navLinkClass =
+    "text-sm font-semibold text-brand-gray-700 transition-colors hover:text-brand-blue";
 
   return (
-    <>
-      <motion.header
-        initial={{ y: -12, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="pointer-events-none absolute inset-x-0 top-0 z-30 px-4 pt-3 sm:px-6 sm:pt-4"
-      >
-        <div className="pointer-events-auto mx-auto flex w-full max-w-6xl justify-center">
-          <div className="flex w-full items-center justify-between gap-2 rounded-full border border-white/5 bg-slate-900/[0.12] px-3 py-1 shadow-md backdrop-blur-md sm:gap-3 sm:px-4 sm:py-1.5">
-            <a
-              href="/"
-              className="flex min-w-0 shrink items-center rounded-full outline-none ring-offset-slate-900 focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-1"
-              aria-label="SuperGP — home"
-            >
-              <SuperGPLogo />
+    <nav
+      className={cn(
+        "sticky top-4 z-50 mx-auto w-full max-w-[1100px] px-4 sm:px-6",
+        className,
+      )}
+    >
+      <div className="flex items-center justify-between gap-4 rounded-full border border-brand-gray-200 bg-white/90 px-5 py-3 shadow-[0_8px_24px_rgba(13,18,48,0.08)] backdrop-blur-md sm:px-7">
+        <Link href="/" className="flex shrink-0 items-center" aria-label="SuperGP — home">
+          <Image
+            src="/landing/supergp-logo.png"
+            alt="SuperGP"
+            width={140}
+            height={40}
+            className="h-8 w-auto sm:h-10"
+            priority
+          />
+        </Link>
+
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3 md:gap-6 lg:gap-7">
+          <div className="hidden items-center gap-6 md:flex lg:gap-7">
+            <a href={productHref} className={navLinkClass}>
+              Product
             </a>
-
-            <div className="hidden shrink-0 items-center gap-1.5 sm:flex sm:gap-2">
-              <a
-                href="https://app.supergpapp.com/auth?mode=invite"
-                className="inline-flex items-center rounded-md border border-white/10 bg-white/5 px-2.5 py-1 font-display text-xs font-semibold text-white/95 backdrop-blur-sm transition-all hover:border-white/15 hover:bg-white/10 sm:px-3 sm:text-sm"
-              >
-                I have an invitation code
-              </a>
-              <a
-                href="https://app.supergpapp.com/auth"
-                className="inline-flex items-center rounded-md border border-white/10 bg-white/5 px-2.5 py-1 font-display text-xs font-semibold text-white/95 backdrop-blur-sm transition-all hover:border-white/15 hover:bg-white/10 sm:px-3 sm:text-sm"
-              >
-                Login
-              </a>
-              <button
-                type="button"
-                onClick={() => setDemoOpen(true)}
-                className="inline-flex items-center rounded-md bg-white px-3 py-1 font-display text-xs font-semibold text-slate-900 shadow-sm transition-all hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-900 sm:px-4 sm:text-sm"
-              >
-                Book a Demo
-              </button>
-            </div>
+            <Link href={pricingHref} className={navLinkClass}>
+              Pricing
+            </Link>
+            <a href={faqHref} className={navLinkClass}>
+              FAQ
+            </a>
+            <a
+              href="https://app.supergpapp.com/auth"
+              className={navLinkClass}
+            >
+              Login
+            </a>
           </div>
+          <button
+            type="button"
+            onClick={openDemo}
+            className="inline-flex items-center rounded-full bg-black px-3.5 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90 sm:px-5 sm:py-2.5 sm:text-sm"
+          >
+            Start Free Trial
+          </button>
+          <button
+            type="button"
+            className="inline-flex items-center justify-center rounded-full border border-brand-gray-200 p-2 text-brand-gray-900 md:hidden"
+            aria-expanded={mobileOpen}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMobileOpen((v) => !v)}
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
-      </motion.header>
+      </div>
 
-      <BookDemoDialog open={demoOpen} onOpenChange={setDemoOpen} />
-    </>
+      {mobileOpen ? (
+        <div className="mt-2 flex flex-col gap-1 rounded-2xl border border-brand-gray-200 bg-white p-3 shadow-lg md:hidden">
+          <a
+            href={productHref}
+            className="rounded-lg px-3 py-2.5 text-sm font-semibold text-brand-gray-700"
+            onClick={() => setMobileOpen(false)}
+          >
+            Product
+          </a>
+          <Link
+            href={pricingHref}
+            className="rounded-lg px-3 py-2.5 text-sm font-semibold text-brand-gray-700"
+            onClick={() => setMobileOpen(false)}
+          >
+            Pricing
+          </Link>
+          <a
+            href={faqHref}
+            className="rounded-lg px-3 py-2.5 text-sm font-semibold text-brand-gray-700"
+            onClick={() => setMobileOpen(false)}
+          >
+            FAQ
+          </a>
+          <a
+            href="https://app.supergpapp.com/auth"
+            className="rounded-lg px-3 py-2.5 text-sm font-semibold text-brand-gray-700"
+            onClick={() => setMobileOpen(false)}
+          >
+            Login
+          </a>
+          <a
+            href="https://app.supergpapp.com/auth?mode=invite"
+            className="rounded-lg px-3 py-2.5 text-sm font-semibold text-brand-gray-700"
+            onClick={() => setMobileOpen(false)}
+          >
+            Invitation code
+          </a>
+        </div>
+      ) : null}
+    </nav>
   );
 };
 

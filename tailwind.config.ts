@@ -14,8 +14,11 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Chakra Petch"', "system-ui", "sans-serif"],
-        body: ['"Space Grotesk"', "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "system-ui", "sans-serif"],
+        hero: ["var(--font-hero)", "system-ui", "sans-serif"],
+        body: ["var(--font-sans)"],
+        sans: ["var(--font-sans)"],
+        mono: ["var(--font-mono)", "ui-monospace", "SF Mono", "Menlo", "monospace"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -55,12 +58,32 @@ export default {
           DEFAULT: "hsl(var(--surface))",
           raised: "hsl(var(--surface-raised))",
         },
+        navy: {
+          DEFAULT: "hsl(var(--navy))",
+          raised: "hsl(var(--navy-raised))",
+        },
         glow: "hsl(var(--glow))",
         headline: "hsl(var(--headline) / <alpha-value>)",
         subtext: "hsl(var(--subtext))",
         "on-light-heading": "hsl(var(--on-light-heading))",
         "on-light-body": "hsl(var(--on-light-body))",
         "on-light-muted": "hsl(var(--on-light-muted))",
+        brand: {
+          blue: "#1e61f0",
+          navy: "#0d1230",
+          bg: "#070B14",
+          electric: "#5B4FFF",
+          critical: "#FF4D6A",
+          warning: "#FFB830",
+          text: "#F0F4FF",
+          gray: {
+            900: "#1a1a1a",
+            700: "#565656",
+            500: "#8a8a8a",
+            200: "#e5e7eb",
+            100: "#f2f3f5",
+          },
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
