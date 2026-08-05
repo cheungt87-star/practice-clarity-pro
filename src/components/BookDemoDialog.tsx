@@ -157,7 +157,11 @@ const BookDemoDialog = ({ open, onOpenChange }: BookDemoDialogProps) => {
               for more information.
             </p>
 
-            <Button type="submit" disabled={isSubmitting} className="w-full font-display font-semibold text-base py-5">
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full rounded-full border border-brand-electric bg-brand-electric py-5 font-display text-base font-semibold text-white hover:bg-brand-electric/90 hover:opacity-90"
+            >
               {isSubmitting ? "Sending..." : "Start free trial"}
             </Button>
           </form>

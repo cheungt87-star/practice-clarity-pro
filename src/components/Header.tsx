@@ -65,7 +65,7 @@ const Header = ({ className }: HeaderProps) => {
           <button
             type="button"
             onClick={openDemo}
-            className="inline-flex items-center rounded-full bg-black px-3.5 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90 sm:px-5 sm:py-2.5 sm:text-sm"
+            className="inline-flex items-center rounded-full bg-brand-electric px-3.5 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90 sm:px-5 sm:py-2.5 sm:text-sm"
           >
             Start Free Trial
           </button>

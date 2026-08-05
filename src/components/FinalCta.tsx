@@ -16,9 +16,8 @@ export default function FinalCta() {
               {FINAL_CTA.headline}
             </h3>
             <p className="m-0 text-base leading-relaxed text-[#c8cbe0]">{FINAL_CTA.body}</p>
-            <p className="mt-4 text-[13px] text-[#8a8ea8]">{FINAL_CTA.riskLine}</p>
           </div>
-          <LandingButton onClick={openDemo} variant="white" className="shrink-0">
+          <LandingButton onClick={openDemo} className="shrink-0">
             {FINAL_CTA.cta}
           </LandingButton>
         </div>

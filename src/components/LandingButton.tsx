@@ -19,7 +19,7 @@ const sizeClasses = {
 };
 
 const variantClasses = {
-  primary: "border border-black bg-black text-white hover:opacity-90",
+  primary: "border border-brand-electric bg-brand-electric text-white hover:opacity-90",
   secondary: "border border-black bg-white text-black hover:bg-brand-gray-100",
   blue: "border border-brand-blue bg-brand-blue text-white hover:opacity-90",
   white: "border border-white bg-white text-black hover:bg-brand-gray-100",

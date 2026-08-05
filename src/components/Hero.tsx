@@ -39,7 +39,7 @@ export default function Hero() {
           <LandingButton
             onClick={openDemo}
             size="md"
-            className="whitespace-nowrap border-[#5B4FFF] bg-[#5B4FFF] px-5 py-2.5 text-sm text-white hover:opacity-90 sm:px-6 sm:py-3 sm:text-base"
+            className="whitespace-nowrap px-5 py-2.5 text-sm sm:px-6 sm:py-3 sm:text-base"
           >
             {HERO.primaryCta}
           </LandingButton>
@@ -86,7 +86,6 @@ export default function Hero() {
                 muted
                 loop
                 playsInline
-                controls
                 preload="metadata"
                 aria-label="SuperGP product demo slideshow"
               />

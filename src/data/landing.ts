@@ -283,9 +283,8 @@ export const LANDING_FAQS: FaqItem[] = [
 
 export const FINAL_CTA = {
   headline: "Run your practice. Not your spreadsheets.",
-  body: "Start your 14-day free trial today. No card required, no sales call.",
+  body: "Start your 14-day free trial today.",
   cta: "Start My Free Trial",
-  riskLine: "14 days free. No credit card. Cancel anytime.",
 } as const;
 
 export const FOOTER_COPY = {
