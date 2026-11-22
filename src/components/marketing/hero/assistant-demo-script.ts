@@ -22,8 +22,6 @@ export type Frame = {
   popup: PopupData | null;
 };
 
-export const TINTS = ["#ffe6dc", "#fff1cf", "#ece8ff", "#dff3e6"] as const;
-
 export const LABELS = [
   "Rota assistant",
   "Rota assistant",
