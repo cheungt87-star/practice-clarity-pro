@@ -1,16 +1,27 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useDemoDialog } from "@/components/demo-dialog-context";
+import { Wordmark } from "@/components/Wordmark";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 type HeaderProps = {
   className?: string;
 };
+
+const FEATURE_LINKS = [
+  { label: "Policy GPT", href: "/products/policy-gpt" },
+  { label: "Rota Assistant", href: "/products/rota-assistant" },
+] as const;
 
 const Header = ({ className }: HeaderProps) => {
   const pathname = usePathname();
@@ -18,60 +29,78 @@ const Header = ({ className }: HeaderProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const isHome = pathname === "/";
 
-  const productHref = isHome ? "#features" : "/#features";
-  const pricingHref = isHome ? "#pricing" : "/pricing";
-  const faqHref = isHome ? "#faq" : "/#faq";
+  const homeHref = "/";
+  const benefitsHref = isHome ? "#benefits" : "/#benefits";
+  const pricingHref = isHome ? "#pricing" : "/#pricing";
 
   const navLinkClass =
-    "text-sm font-semibold text-brand-gray-700 transition-colors hover:text-brand-blue";
+    "text-[17px] font-semibold text-ink transition-colors hover:text-coral-text";
+
+  const dropdownItemClass =
+    "min-h-11 cursor-pointer rounded-lg px-3 py-2.5 text-[15px] font-semibold text-ink focus:bg-cream focus:text-coral-text";
 
   return (
-    <nav
-      className={cn(
-        "sticky top-4 z-50 mx-auto w-full max-w-[1100px] px-4 sm:px-6",
-        className,
-      )}
+    <header
+      className={cn("sticky top-0 z-50 bg-cream/92 backdrop-blur-md", className)}
     >
-      <div className="flex items-center justify-between gap-4 rounded-full border border-brand-gray-200 bg-white/90 px-5 py-3 shadow-[0_8px_24px_rgba(13,18,48,0.08)] backdrop-blur-md sm:px-7">
+      <div className="mx-auto flex min-h-[88px] w-[calc(100%-48px)] max-w-[1360px] items-center justify-between gap-4 max-lg:min-h-[68px] max-lg:w-[calc(100%-24px)]">
         <Link href="/" className="flex shrink-0 items-center" aria-label="SuperGP — home">
-          <Image
-            src="/landing/supergp-logo.png"
-            alt="SuperGP"
-            width={140}
-            height={40}
-            className="h-8 w-auto sm:h-10"
-            priority
-          />
+          <Wordmark className="h-9 w-auto lg:h-11" />
         </Link>
 
-        <div className="flex shrink-0 items-center gap-2 sm:gap-3 md:gap-6 lg:gap-7">
-          <div className="hidden items-center gap-6 md:flex lg:gap-7">
-            <a href={productHref} className={navLinkClass}>
-              Product
-            </a>
-            <Link href={pricingHref} className={navLinkClass}>
-              Pricing
-            </Link>
-            <a href={faqHref} className={navLinkClass}>
-              FAQ
-            </a>
-            <a
-              href="https://app.supergpapp.com/auth"
-              className={navLinkClass}
+        <nav className="ml-14 hidden items-center gap-10 md:flex" aria-label="Primary">
+          <Link href={homeHref} className={navLinkClass}>
+            Home
+          </Link>
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              className={cn(
+                navLinkClass,
+                "inline-flex min-h-11 items-center gap-1 rounded-pill px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-cream",
+              )}
             >
-              Login
-            </a>
-          </div>
+              Features
+              <ChevronDown className="h-4 w-4" aria-hidden />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="start"
+              className="min-w-[220px] rounded-panel border-hairline bg-cream p-1.5 text-ink shadow-soft"
+            >
+              {FEATURE_LINKS.map((item) => (
+                <DropdownMenuItem key={item.href} asChild className={dropdownItemClass}>
+                  <Link href={item.href}>{item.label}</Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <a href={benefitsHref} className={navLinkClass}>
+            Benefits
+          </a>
+          <a href={pricingHref} className={navLinkClass}>
+            Pricing
+          </a>
+          <Link href="/faq" className={navLinkClass}>
+            FAQ
+          </Link>
+        </nav>
+
+        <div className="flex shrink-0 items-center gap-6">
+          <a
+            href="https://app.supergpapp.com/auth"
+            className="hidden text-[17px] font-semibold text-ink underline hover:text-coral-text sm:inline"
+          >
+            Log in
+          </a>
           <button
             type="button"
             onClick={openDemo}
-            className="inline-flex items-center rounded-full bg-brand-electric px-3.5 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-90 sm:px-5 sm:py-2.5 sm:text-sm"
+            className="inline-flex items-center rounded-pill bg-ink px-5 py-2.5 text-[15px] font-semibold text-cream transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
           >
-            Start Free Trial
+            Start free trial
           </button>
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-full border border-brand-gray-200 p-2 text-brand-gray-900 md:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-ink text-ink md:hidden"
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             onClick={() => setMobileOpen((v) => !v)}
@@ -82,45 +111,65 @@ const Header = ({ className }: HeaderProps) => {
       </div>
 
       {mobileOpen ? (
-        <div className="mt-2 flex flex-col gap-1 rounded-2xl border border-brand-gray-200 bg-white p-3 shadow-lg md:hidden">
-          <a
-            href={productHref}
-            className="rounded-lg px-3 py-2.5 text-sm font-semibold text-brand-gray-700"
+        <div className="mx-auto flex w-[calc(100%-24px)] max-w-[1360px] flex-col gap-1 border-t border-hairline bg-cream py-3 md:hidden">
+          <Link
+            href={homeHref}
+            className="rounded-lg px-3 py-2.5 text-sm font-semibold text-ink"
             onClick={() => setMobileOpen(false)}
           >
-            Product
+            Home
+          </Link>
+          <div className="px-3 py-2 text-xs font-bold uppercase tracking-[0.08em] text-ink-muted">
+            Features
+          </div>
+          {FEATURE_LINKS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="rounded-lg px-3 py-2.5 pl-6 text-sm font-semibold text-ink"
+              onClick={() => setMobileOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <a
+            href={benefitsHref}
+            className="rounded-lg px-3 py-2.5 text-sm font-semibold text-ink"
+            onClick={() => setMobileOpen(false)}
+          >
+            Benefits
           </a>
-          <Link
+          <a
             href={pricingHref}
-            className="rounded-lg px-3 py-2.5 text-sm font-semibold text-brand-gray-700"
+            className="rounded-lg px-3 py-2.5 text-sm font-semibold text-ink"
             onClick={() => setMobileOpen(false)}
           >
             Pricing
-          </Link>
-          <a
-            href={faqHref}
-            className="rounded-lg px-3 py-2.5 text-sm font-semibold text-brand-gray-700"
+          </a>
+          <Link
+            href="/faq"
+            className="rounded-lg px-3 py-2.5 text-sm font-semibold text-ink"
             onClick={() => setMobileOpen(false)}
           >
             FAQ
-          </a>
+          </Link>
           <a
             href="https://app.supergpapp.com/auth"
-            className="rounded-lg px-3 py-2.5 text-sm font-semibold text-brand-gray-700"
+            className="rounded-lg px-3 py-2.5 text-sm font-semibold text-ink"
             onClick={() => setMobileOpen(false)}
           >
-            Login
+            Log in
           </a>
           <a
             href="https://app.supergpapp.com/auth?mode=invite"
-            className="rounded-lg px-3 py-2.5 text-sm font-semibold text-brand-gray-700"
+            className="rounded-lg px-3 py-2.5 text-sm font-semibold text-ink"
             onClick={() => setMobileOpen(false)}
           >
             Invitation code
           </a>
         </div>
       ) : null}
-    </nav>
+    </header>
   );
 };
 

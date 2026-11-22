@@ -2,28 +2,29 @@
 
 import { DemoDialogProvider } from "@/components/demo-dialog-context";
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
 import ProblemSection from "@/components/ProblemSection";
-import FeaturesSection from "@/components/FeaturesSection";
-import PricingSection from "@/components/PricingSection";
-import FaqSection from "@/components/FaqSection";
+import SolutionSection from "@/components/SolutionSection";
+import BenefitsSection from "@/components/BenefitsSection";
 import FinalCta from "@/components/FinalCta";
+import FaqBanner from "@/components/FaqBanner";
 import Footer from "@/components/Footer";
 
-export default function HomePage() {
+type HomePageProps = {
+  hero: React.ReactNode;
+};
+
+export default function HomePage({ hero }: HomePageProps) {
   return (
     <DemoDialogProvider>
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-[#f3eee6]">
         <Header />
         <main>
-          <Hero />
-          <div className="gradient-strip" aria-hidden />
+          {hero}
           <ProblemSection />
-          <div className="gradient-strip" aria-hidden />
-          <FeaturesSection />
-          <PricingSection />
-          <FaqSection />
+          <SolutionSection />
+          <BenefitsSection />
           <FinalCta />
+          <FaqBanner />
         </main>
         <Footer />
       </div>

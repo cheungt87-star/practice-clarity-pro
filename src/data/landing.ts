@@ -1,22 +1,39 @@
-export type PainAccent = "indigo" | "critical" | "warning";
-
-export type PainPoint = {
+export type ProblemSpot = {
   id: string;
-  headline: string;
+  number: string;
+  tint: "butter" | "pink" | "lilac" | "peach";
+  /** Theme label shown next to the number (e.g. "Rota"). */
+  step: string;
+  /** Recognisable practice-manager moment, shown as a quote. */
+  moment: string;
+  title: string;
   body: string;
-  accent: PainAccent;
 };
 
-export type LandingFeature = {
+/** @deprecated Prefer ProblemSpot */
+export type ProblemBlindSpot = ProblemSpot;
+
+export type ProductFeature = {
   id: string;
+  tag: string;
   headline: string;
-  body: string;
+  subheadline: string;
   ticks: string[];
   image: string;
-  /** When set, the feature media cycles through these images. */
-  images?: string[];
   imageAlt: string;
-  gradient: string;
+  /** Optional demo video; when set, ProductScreen plays it instead of the static image. */
+  video?: string;
+  tile: "butter" | "lilac" | "mint" | "peach";
+  /** Optional product-details page link shown under the feature ticks. */
+  learnMoreHref?: string;
+  learnMoreLabel?: string;
+};
+
+export type Benefit = {
+  id: string;
+  struck: string;
+  headline: string;
+  body: string;
 };
 
 export type PricingTier = {
@@ -35,160 +52,175 @@ export type FaqItem = {
   answer: string;
 };
 
+/** @deprecated Kept for any legacy imports; prefer PRODUCT_FEATURES. */
+export type LandingFeature = {
+  id: string;
+  headline: string;
+  body: string;
+  ticks: string[];
+  image: string;
+  images?: string[];
+  imageAlt: string;
+  gradient: string;
+};
+
 export const HERO = {
-  headline: "Run your practice. Not your spreadsheets.",
+  tag: "The AI-powered app for GP practices",
+  headlineLead: "Less faff.",
+  headlineAccent: "More patients.",
   subheadline:
-    "Cut admin by up to 70% so you can focus on your patients. One system for rota, tasks, and audit-ready compliance",
-  primaryCta: "Start My Free Trial",
-  secondaryCta: "See Pricing",
-  video: "/videos/hero-slideshow.mp4",
-  screenshot: "/features/dashboard-1.png",
-  screenshotAlt: "SuperGP practice dashboard",
+    "SuperGP’s AI assistants handle your rotas, policies and tasks, so you can focus on patient care.",
+  primaryCta: "Start free trial",
+  secondaryCta: "See how it works",
+  riskLine: "14 days free. No credit card. Cancel anytime.",
 } as const;
 
 export const PROBLEM = {
-  title: "Sound familiar?",
-  intro:
-    "The average GP now cares for over 2,192 patients — up sharply since 2015 — while funding hasn't kept pace. Doing more with a broken system isn't sustainable.",
+  eyebrow: "The problem",
+  headline: "Rota. Policies. Tasks.",
+  headlineAccent: "Scattered across tools — so everything takes longer than it should.",
 } as const;
 
-export const PAIN_POINTS: PainPoint[] = [
-  {
-    id: "everywhere",
-    headline: "Everything lives somewhere else.",
-    body: "Rota in a spreadsheet, tasks in WhatsApp, staff records in another tab — nothing connects. Your team loses half the day just finding where things live.",
-    accent: "indigo",
-  },
+export const PROBLEM_SPOTS: ProblemSpot[] = [
   {
     id: "rota",
-    headline: "Your rota lives in spreadsheets — and it shows.",
-    body: "One missed cell or forgotten swap, and you're scrambling for cover by 8am. UK practices report spending £60,000–£120,000 a year on locums plugging gaps a better rota would catch first.",
-    accent: "indigo",
+    number: "01",
+    tint: "butter",
+    step: "Rota",
+    moment: "Who's covering Thursday?",
+    title: "The rota lives in a spreadsheet. Swaps live in WhatsApp.",
+    body: "One version in Excel, another in a group chat, leave requests in someone's inbox. Finding who's on — and who's free — means chasing three places before the clinic even opens.",
   },
   {
-    id: "cqc",
-    headline: "CQC inspections make you nervous",
-    body: "34% of GP practices fail at least one required CQC standard. When evidence is scattered across five systems, you're not ready — you're guessing.",
-    accent: "critical",
-  },
-  {
-    id: "admin",
-    headline: "Admin eats into patient care time.",
-    body: "GPs now spend over 25% of their working time on admin, not care. Workload keeps climbing, and teams are burning out trying to keep up.",
-    accent: "warning",
-  },
-];
-
-export const FEATURES_SECTION = {
-  eyebrow: "The platform",
-  headline: "One platform. Every site. No more chaos.",
-  subheadline:
-    "Five tools that replace your spreadsheets, your WhatsApp group, and your compliance folder — in one place.",
-} as const;
-
-export const LANDING_FEATURES: LandingFeature[] = [
-  {
-    id: "rota",
-    headline: "Build a safe rota in minutes, not hours.",
-    body: "Drag and drop staff into AM, PM, or custom shifts across every site—with built-in validation that catches conflicts before you publish.",
-    ticks: [
-      "Coordinate rotas across all locations",
-      "Fill gaps with temporary or cross-site coverage",
-      "Reuse and duplicate shifts instantly",
-      "Automated validation catches conflicts",
-      "Instant team notifications",
-    ],
-    image: "/features/rota-2.png",
-    images: ["/features/rota-2.png", "/features/rota-1.png", "/features/rota-3.png"],
-    imageAlt: "SuperGP rota planner",
-    gradient: "radial-gradient(circle at 25% 20%, #2b5cf5 0%, #8b3ff0 55%, #f0399e 100%)",
-  },
-  {
-    id: "dashboard",
-    headline: "See your whole practice at a glance.",
-    body: "See everything that's happening across your operation right now. Track shifts, room assignments, capacity, and upcoming tasks—all in one view.",
-    ticks: [
-      "View current shifts and room assignments at a glance",
-      "Access historical rotas for planning and print anytime",
-      "Track upcoming deadlines and tasks in one place",
-      "Monitor patient capacity across all sites in real-time",
-      "See on-call leads and coverage status instantly",
-      "Export data for reporting or offline use",
-    ],
-    image: "/features/dashboard-3.png",
-    images: [
-      "/features/dashboard-3.png",
-      "/features/dashboard-4.png",
-      "/features/dashboard-2.png",
-      "/features/dashboard-1.png",
-    ],
-    imageAlt: "SuperGP dashboard",
-    gradient: "radial-gradient(circle at 75% 75%, #f0399e 0%, #8b3ff0 50%, #2b5cf5 100%)",
+    id: "policies",
+    number: "02",
+    tint: "pink",
+    step: "Policies & SOPs",
+    moment: "What's our leave notice?",
+    title: "Policies sit on a shared drive. Nobody knows which file is current.",
+    body: "SOPs buried in folders, old PDFs still circulating, answers by guesswork. When someone asks a simple question, you're hunting documents instead of getting on with the day.",
   },
   {
     id: "tasks",
-    headline: "Replace the WhatsApp thread with an audit trail.",
-    body: "Automate routine tasks and track completion across your entire operation. Assign tasks to individuals, teams, or specific sites—and monitor progress in real-time.",
+    number: "03",
+    tint: "lilac",
+    step: "Tasks",
+    moment: "Has the fridge check been done?",
+    title: "Checks and audits live in lists nobody opens.",
+    body: "Training due dates in one place, fridge logs in another, CQC evidence in a third. Things slip because ownership is unclear — and you only find out when it's late.",
+  },
+];
+
+export const SOLUTION = {
+  eyebrow: "The platform",
+  headline: "One app that does the faff.",
+  subheadline: "Your rota, your policies and your compliance, in one place. Just ask, and it's done.",
+} as const;
+
+export const PRODUCT_FEATURES: ProductFeature[] = [
+  {
+    id: "all-in-one",
+    tag: "All in 1 system",
+    headline: "One app. Not five tabs.",
+    subheadline: "Everything your practice runs on, in one place.",
     ticks: [
-      "Create repeatable tasks and deploy them in seconds",
-      "Assign to individuals, job families, or entire teams",
-      "Roll out tasks across one or multiple sites at once",
-      "Filter and sort tasks to stay on top of what's due",
-      "Auto-email reminders and track completion status",
-      "Full audit trail of every task and action",
+      "One app for your rota, policies and compliance",
+      "No more hopping between a spreadsheet, a shared drive, a WhatsApp group and your inbox",
+      "Your whole team sees the same thing, at the same time",
+      "AI where it saves you effort. A simple list where it doesn't",
+      "If you can send a text, you can use it",
+    ],
+    image: "/features/dashboard-3.png",
+    imageAlt: "SuperGP dashboard — all in one system",
+    video: "/videos/all-in-one-demo.mp4",
+    tile: "butter",
+  },
+  {
+    id: "rota",
+    tag: "Rota Assistant",
+    headline: "Say what you need. The rota sorts itself.",
+    subheadline: "Plan, swap and cover shifts in plain English.",
+    ticks: [
+      'Type "Swap Sam for Priya on Thursday morning" and it gets on with it',
+      "Checks leave, other shifts and your own rules first",
+      "Clashes are held back, with the reason",
+      "No more finding out on the day",
+    ],
+    image: "/features/rota-2.png",
+    imageAlt: "SuperGP Rota Assistant",
+    video: "/videos/rota-demo.mp4",
+    tile: "lilac",
+    learnMoreHref: "/products/rota-assistant",
+    learnMoreLabel: "Learn more",
+  },
+  {
+    id: "policy",
+    tag: "Policy GPT",
+    headline: "Ask your policies. Get the answer and the source.",
+    subheadline: "A search bar that actually knows your practice.",
+    ticks: [
+      'Ask in your own words: "How much notice do we need for annual leave?"',
+      "Get a short answer, the exact section it came from and how confident it is",
+      "Searches your practice's documents, not the internet",
+      "No more scrolling through PDFs",
+      "Not clinical advice",
+    ],
+    image: "/features/policy-gpt-mockup.png",
+    imageAlt: "SuperGP Policy GPT",
+    video: "/videos/policy-gpt-demo.mp4",
+    tile: "lilac",
+    learnMoreHref: "/PolicyGPT",
+    learnMoreLabel: "Learn more",
+  },
+  {
+    id: "audit",
+    tag: "Audit Manager",
+    headline: "Every task tracked. Nothing left to chance.",
+    subheadline: "A simple list that never forgets.",
+    ticks: [
+      "Every check, training and audit in one list",
+      "An owner and a due date on every task",
+      "Reminders go out before things run late",
+      "See what's done and what's open at a glance",
+      "No AI here. Just a tidy list that does its job",
     ],
     image: "/features/tasks-3.png",
-    images: [
-      "/features/tasks-3.png",
-      "/features/tasks-2.png",
-      "/features/tasks-1.png",
-    ],
-    imageAlt: "SuperGP task manager",
-    gradient: "radial-gradient(circle at 20% 80%, #16a34a 0%, #1e61f0 55%, #8b3ff0 100%)",
+    imageAlt: "SuperGP Audit Manager",
+    video: "/videos/tasks-demo.mp4",
+    tile: "mint",
+  },
+];
+
+export const BENEFITS = {
+  eyebrow: "Benefits",
+  headline: "What changes when the faff goes.",
+  subheadline: "Less time on admin. More time for patients.",
+} as const;
+
+export const BENEFIT_ITEMS: Benefit[] = [
+  {
+    id: "hours",
+    struck: "Rebuilding the rota by hand",
+    headline: "Hours back.",
+    body: "Instead of rebuilding the rota by hand, you type a sentence. Your team gets its week back.",
   },
   {
-    id: "sites",
-    headline: "Run every location from one place.",
-    body: "Manage all your practice locations from one control center. Add sites, update hours, and allocate rooms and resources—instantly across your entire network.",
-    ticks: [
-      "Manage all practice locations from one dashboard",
-      "Add new sites as your practice expands",
-      "Update opening hours and operating days instantly",
-      "Assign and track clinical and non-clinical rooms",
-      "Set resource allocation per site",
-      "Control operations across your entire network",
-    ],
-    image: "/features/multisite-1.png",
-    images: [
-      "/features/multisite-1.png",
-      "/features/multisite-2.png",
-      "/features/multisite-3.png",
-    ],
-    imageAlt: "SuperGP sites manager",
-    gradient: "radial-gradient(circle at 80% 25%, #8b3ff0 0%, #f0399e 55%, #ff8a4c 100%)",
+    id: "hidden",
+    struck: "Blind spots found too late",
+    headline: "Nothing hidden.",
+    body: "Instead of blind spots found too late, every clash, overdue task and missing answer shows up early, while you can still fix it.",
   },
   {
-    id: "teams",
-    headline: "One source of truth for your whole team.",
-    body: "Centralize your staff directory and control who can access what. Manage roles, permissions, and user lifecycles—all from one place.",
-    ticks: [
-      "Maintain a single staff directory with contact details",
-      "Set roles and permissions for each user",
-      "Organize staff by site, job family, and title",
-      "Add, update, or offboard users easily",
-      "Control access to sensitive data and features",
-      "Keep your practice secure and compliant",
-    ],
-    image: "/features/team-4.png",
-    images: [
-      "/features/team-4.png",
-      "/features/team-5.png",
-      "/features/team-1.png",
-      "/features/team-3.png",
-      "/features/team-2.png",
-    ],
-    imageAlt: "SuperGP teams manager",
-    gradient: "radial-gradient(circle at 50% 50%, #1e61f0 0%, #2b5cf5 45%, #8b3ff0 100%)",
+    id: "clinics",
+    struck: "Slots lost to rota slips",
+    headline: "Fuller clinics.",
+    body: "Instead of slots lost to rota slips, the right people are in the right place. More appointments run, and more patients are seen.",
+  },
+  {
+    id: "easy",
+    struck: "Training days and manuals",
+    headline: "Easy from day one.",
+    body: "Instead of training days and manuals, SuperGP works like the apps you already use. Ask, tap, done.",
   },
 ];
 
@@ -212,7 +244,7 @@ export const PRICING_TIERS: PricingTier[] = [
       "Self-service set-up",
       "Email support",
     ],
-    cta: "Start Free Trial",
+    cta: "Start free trial",
   },
   {
     id: "growth",
@@ -228,7 +260,7 @@ export const PRICING_TIERS: PricingTier[] = [
       "Support via E-mail and Whatsapp",
     ],
     badge: "Most Popular",
-    cta: "Start Free Trial",
+    cta: "Start free trial",
   },
   {
     id: "network",
@@ -246,7 +278,7 @@ export const PRICING_TIERS: PricingTier[] = [
       "Support via E-mail and Whatsapp",
       "Quarterly reviews",
     ],
-    cta: "Start Free Trial",
+    cta: "Start free trial",
   },
 ];
 
@@ -282,11 +314,38 @@ export const LANDING_FAQS: FaqItem[] = [
 ];
 
 export const FINAL_CTA = {
-  headline: "Run your practice. Not your spreadsheets.",
-  body: "Start your 14-day free trial today.",
-  cta: "Start My Free Trial",
+  headlineLead: "Ready for",
+  headlineAccent: "less faff?",
+  body: "Try SuperGP free for 14 days. No card needed.",
+  primaryCta: "Start free trial",
+  secondaryCta: "Book a demo",
 } as const;
 
 export const FOOTER_COPY = {
-  blurb: "GP practice management software — rota, tasks, and staffing visibility, built by NHS GPs.",
+  disclaimer:
+    "SuperGP’s AI assistants handle your rotas, policies and tasks, so you can focus on patient care.",
 } as const;
+
+/** Legacy aliases so older components compile during rebuild. */
+export const FEATURES_SECTION = {
+  eyebrow: SOLUTION.eyebrow,
+  headline: SOLUTION.headline,
+  subheadline: SOLUTION.subheadline,
+} as const;
+
+export const LANDING_FEATURES: LandingFeature[] = PRODUCT_FEATURES.map((feature) => ({
+  id: feature.id,
+  headline: feature.headline,
+  body: feature.subheadline,
+  ticks: feature.ticks,
+  image: feature.image,
+  imageAlt: feature.imageAlt,
+  gradient: "none",
+}));
+
+export const PAIN_POINTS = PROBLEM_SPOTS.map((spot) => ({
+  id: spot.id,
+  headline: spot.title,
+  body: spot.body,
+  accent: "indigo" as const,
+}));

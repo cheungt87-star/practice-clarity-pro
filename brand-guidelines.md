@@ -1,12 +1,14 @@
 # SuperGP - Brand Guidelines
 
-> Version 2.0 | August 2026 | Source of truth for the SuperGP marketing site (practice-clarity-pro)
+> Version 2.0 | August 2026
+
+> **Marketing visual system:** superseded for the live site by [design-system.md](design-system.md) (marketing DS v0.1 — cream / ink / coral, Bricolage + Inter). Brand foundation, positioning, messaging, and voice below still apply. The dark-first / electric visual notes in this file are historical.
 
 ---
 
 ### Scope of this version
 
-This update resolves a fragmentation problem: four different colour/type systems were live at once across the logo brief, the product app, its design-system.html, and this marketing site — none of which fully delivered on "disruptive, tech-first, simple." This version unifies **visual identity, logo, colour, and typography** for the marketing site around one electric, dark-first system. Brand foundation, positioning, messaging, and voice below were already consistent and are carried forward unchanged.
+This update resolves a fragmentation problem: four different colour/type systems were live at once across the logo brief, the product app, its design-system.html, and this marketing site — none of which fully delivered on "disruptive, tech-first, simple." This version unified **visual identity, logo, colour, and typography** for the marketing site around one electric, dark-first system. That visual direction is now replaced by marketing DS v0.1; foundation, positioning, messaging, and voice below were already consistent and are carried forward unchanged.
 
 The product app's own in-product UI theme is intentionally **out of scope** here and may continue to run its current light "calm clinical" system separately — that's a decision for a future pass.
 

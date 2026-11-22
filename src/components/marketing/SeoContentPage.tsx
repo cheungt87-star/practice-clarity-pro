@@ -236,7 +236,7 @@ export default function SeoContentPage({ page, showContactActions = false }: Seo
           </section>
         ) : null}
 
-        <FinalCta />
+        <FinalCta withPricing={false} />
       </article>
     </MarketingPageLayout>
   );

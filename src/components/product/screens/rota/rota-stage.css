@@ -1,0 +1,53 @@
+/* Ported from rota-assistant-product-page.html — scoped under .rotaStage */
+.rotaStage {
+  box-sizing: border-box;
+}
+.rotaStage *, .rotaStage *::before, .rotaStage *::after { box-sizing: border-box; }
+.rotaStage .sw { position:relative;width:100%;overflow:hidden;container-type:inline-size }
+.rotaStage .st { position:absolute;left:0;top:0;width:940px;height:var(--h,506px);transform-origin:0 0;scale:.7;scale:tan(atan2(100cqw,940px));display:flex;gap:8px;padding:8px;background:#fbfaf8;font-size:12px;color:var(--ink);line-height:1.3 }
+.rotaStage .st * { box-sizing:border-box }
+.rotaStage .xl { width:244px;flex:none;border:1px solid var(--hairline);border-radius:18px;background:#fff;display:flex;flex-direction:column;overflow:hidden }
+.rotaStage .xc { flex:1;min-width:0;border:1px solid var(--hairline);border-radius:18px;background:#fff;overflow:hidden;display:flex;flex-direction:column }
+.rotaStage .xr { width:282px;flex:none;border-radius:18px;overflow:hidden;display:flex;flex-direction:column;background:#f6f4f0;border:1px solid var(--hairline) }
+.rotaStage .xpill { border:1px solid var(--hairline);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:500;background:#fff;white-space:nowrap;display:inline-flex;align-items:center;gap:6px }
+.rotaStage .xdark { background:var(--ink);color:var(--cream);border-radius:999px;padding:7px 14px;font-weight:600;font-size:12px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap }
+.rotaStage .xchip { display:inline-block;background:var(--chip-amber-bg);color:var(--chip-amber-fg);border-radius:999px;padding:1px 9px;font-size:11px;font-weight:600 }
+.rotaStage .xsch { display:grid;grid-template-columns:70px repeat(5,minmax(0,1fr));border:1px solid var(--hairline);border-radius:14px;overflow:hidden;margin:0 10px }
+.rotaStage .xsch>div { padding:8px 8px;border-left:1px solid var(--hairline) }
+.rotaStage .xsch>div:first-child { border-left:none;background:#f5f3f0;display:flex;align-items:flex-end;font-size:9.5px;font-weight:700;letter-spacing:.06em;color:var(--muted-strong) }
+.rotaStage .xday b { font-size:13px }
+.rotaStage .xcd { display:block;margin-top:6px;border:1px solid var(--hairline);border-radius:999px;text-align:center;padding:4px 0;font-size:11.5px;font-weight:500;background:#fff }
+.rotaStage .xsec { display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 12px;font-weight:600;font-size:12px;margin:12px 10px 6px }
+.rotaStage .xrow { display:grid;grid-template-columns:70px repeat(5,minmax(0,1fr));border:1px solid var(--hairline);border-radius:14px;overflow:hidden;margin:0 10px 8px }
+.rotaStage .xlab { padding:10px 8px;font-weight:600;font-size:12px;display:flex;flex-direction:column;gap:6px;justify-content:center }
+.rotaStage .xcell { padding:6px;border-left:1px solid var(--hairline);display:flex;flex-direction:column;gap:3px;min-width:0 }
+.rotaStage .xshift { display:flex;align-items:center;gap:4px;font-size:9.5px;color:var(--muted-strong);font-weight:500 }
+.rotaStage .xpl { background:#f0eeea;border-radius:9px;padding:6px 8px;display:flex;justify-content:space-between;font-weight:600;font-size:12px;white-space:nowrap;overflow:hidden }
+.rotaStage .xpl.new { background:var(--chip-green-bg);outline:1.5px solid #3a9d62 }
+.rotaStage .xpl.unc { background:#ffe4dc;outline:1.5px solid #d6513c }
+.rotaStage .xpl.lv { background:#ffd98a }
+.rotaStage .xadd { border:1.5px dashed #bfb6ac;border-radius:9px;padding:5px;text-align:center;color:var(--muted-strong);font-size:11.5px;white-space:nowrap }
+.rotaStage .ring { outline:2.5px solid var(--coral);outline-offset:3px }
+.rotaStage .xav { width:30px;height:30px;border-radius:50%;background:var(--chip-grey-bg);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none }
+.rotaStage .xsr { display:flex;align-items:center;gap:9px;padding:6px 14px }
+.rotaStage .xgh { font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted-strong);padding:12px 14px 2px }
+.rotaStage .xfree { color:var(--chip-green-fg);font-weight:600;font-size:11.5px;margin-left:auto }
+.rotaStage .xbk { margin-left:auto;background:var(--chip-amber-bg);color:var(--chip-amber-fg);border-radius:999px;padding:1px 9px;font-size:11px;font-weight:600 }
+.rotaStage .xhead { background:#111;color:#fff;border-bottom:3px solid var(--coral);padding:12px 14px;display:flex;align-items:center;gap:10px }
+.rotaStage .xtile { width:34px;height:34px;flex:none;border-radius:10px;background:var(--coral);display:flex;align-items:center;justify-content:center }
+.rotaStage .xu { background:#ffe3dc;border-radius:16px 16px 4px 16px;padding:8px 12px;font-size:12.5px;max-width:90% }
+.rotaStage .xa { background:#fff;border:1px solid var(--hairline);border-radius:4px 16px 16px 16px;padding:9px 12px;font-size:12.5px;line-height:1.45;box-shadow:0 1px 2px rgba(35,24,21,.06) }
+.rotaStage .xm { font-size:10px;color:var(--muted-strong);margin-top:3px }
+.rotaStage .xchipb { display:inline-block;border:1px solid #bdb3a9;border-radius:999px;background:#fff;padding:4px 11px;font-size:11.5px;font-weight:600;margin:7px 6px 0 0 }
+.rotaStage .xpl.unc { position:relative;overflow:visible }
+.rotaStage .xbadge { position:absolute;top:-9px;left:6px;background:#c0392b;color:#fff;font-size:8.5px;font-weight:700;padding:0 5px;border-radius:4px }
+.rotaStage .xadd.flag { border:2px solid #e0a31a;background:#fff8e6;color:#7a5600 }
+.rotaStage .xadd.gone { border:1.5px dashed #d6513c;color:#d6513c;background:#fff5f2 }
+.rotaStage .xok { display:block;margin-top:6px;border-radius:999px;text-align:center;padding:4px 0;font-size:11.5px;font-weight:600;background:var(--chip-green-bg);color:var(--chip-green-fg) }
+.rotaStage .xc.dim .xpl:not(.new), .rotaStage .xc.dim .xadd, .rotaStage .xc.dim .xlab, .rotaStage .xc.dim .xshift { opacity:.45 }
+.rotaStage .xck { display:flex;gap:7px;align-items:flex-start;padding:5px 0;border-top:1px solid var(--hairline);font-size:12px }
+.rotaStage .xck:first-child { border-top:none }
+.rotaStage .xtick { width:16px;height:16px;flex:none;border-radius:50%;background:var(--chip-green-bg);color:var(--chip-green-fg);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px }
+@media (max-width:520px) {
+  .rotaStage .xl { display:none }
+}

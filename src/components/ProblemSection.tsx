@@ -1,67 +1,18 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { PAIN_POINTS, PROBLEM } from "@/data/landing";
+import { PROBLEM, PROBLEM_SPOTS, type ProblemSpot } from "@/data/landing";
+import { Chip } from "@/components/Chip";
 import { cn } from "@/lib/utils";
 
-const STAGGER_MS = 0.09;
-const DURATION = 0.28;
+const DURATION = 0.3;
 
-function PainCard({
-  headline,
-  body,
-  index,
-  delay = 0,
-  reduceMotion,
-  className,
-}: {
-  headline: string;
-  body: string;
-  index: number;
-  delay?: number;
-  reduceMotion: boolean | null;
-  className?: string;
-}) {
-  const number = String(index + 1).padStart(2, "0");
-
-  return (
-    <motion.article
-      initial={
-        reduceMotion
-          ? { opacity: 0 }
-          : { opacity: 0, y: 10 }
-      }
-      whileInView={
-        reduceMotion
-          ? { opacity: 1 }
-          : { opacity: 1, y: 0 }
-      }
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{
-        duration: DURATION,
-        delay,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className={cn(
-        "flex h-full flex-col border-brand-gray-200 p-6 lg:p-8",
-        className,
-      )}
-    >
-      <span
-        className="mb-4 font-hero text-[clamp(3rem,6vw,4.5rem)] font-bold leading-none tabular-nums text-brand-electric"
-        aria-hidden
-      >
-        {number}
-      </span>
-      <h3 className="m-0 mb-2.5 font-hero text-xl font-bold uppercase leading-[1.08] tracking-tight text-black">
-        {headline}
-      </h3>
-      <p className="m-0 text-base leading-relaxed text-brand-gray-700">
-        {body}
-      </p>
-    </motion.article>
-  );
-}
+const TINT_BG: Record<ProblemSpot["tint"], string> = {
+  butter: "bg-tint-butter",
+  pink: "bg-tint-pink",
+  lilac: "bg-tint-lilac",
+  peach: "bg-tint-peach",
+};
 
 export default function ProblemSection() {
   const reduceMotion = useReducedMotion();
@@ -69,50 +20,61 @@ export default function ProblemSection() {
   return (
     <section
       id="problem"
-      className="scroll-mt-nav relative overflow-hidden bg-brand-bg px-6 py-20 sm:px-8 sm:py-24"
+      className="scroll-mt-nav bg-cream py-[clamp(3.5rem,8vw,6rem)]"
     >
-      <div className="mx-auto max-w-[1160px]">
+      <div className="mx-auto flex w-[calc(100%-48px)] max-w-[1360px] flex-col gap-14 max-lg:w-[calc(100%-24px)]">
         <motion.div
-          initial={
-            reduceMotion
-              ? { opacity: 0 }
-              : { opacity: 0, y: 10 }
-          }
-          whileInView={
-            reduceMotion
-              ? { opacity: 1 }
-              : { opacity: 1, y: 0 }
-          }
+          initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: DURATION }}
-          className="mb-10 max-w-[640px] text-left sm:mb-12"
+          className="flex flex-col gap-5"
         >
-          <h2 className="mb-4 font-hero text-[clamp(1.625rem,3.5vw,2.125rem)] font-bold uppercase leading-[1.08] tracking-tight text-brand-text">
-            Sound familiar?
+          <Chip variant="amber" className="self-start px-4 py-2 text-sm font-semibold">
+            {PROBLEM.eyebrow}
+          </Chip>
+          <h2 className="text-balance font-heading text-[clamp(2rem,4vw,3.25rem)] font-extrabold leading-none tracking-[-0.04em] text-ink">
+            {PROBLEM.headline}
           </h2>
-          <p className="m-0 text-base leading-relaxed text-brand-text sm:text-[17px]">
-            {PROBLEM.intro}
+          <p className="-mt-2 text-balance font-heading text-[clamp(1.375rem,2.4vw,2rem)] font-extrabold leading-[1.05] tracking-[-0.035em] text-coral">
+            {PROBLEM.headlineAccent}
           </p>
         </motion.div>
 
-        <div className="overflow-hidden rounded-2xl border border-white/10 bg-white">
-          <div className="grid grid-cols-1 sm:grid-cols-2 sm:auto-rows-fr">
-            {PAIN_POINTS.map((point, index) => (
-              <PainCard
-                key={point.id}
-                headline={point.headline}
-                body={point.body}
-                index={index}
-                delay={STAGGER_MS * index}
-                reduceMotion={reduceMotion}
-                className={cn(
-                  "border-b last:border-b-0",
-                  "sm:border-b-0 sm:[&:nth-child(-n+2)]:border-b sm:odd:border-r",
-                  "border-brand-gray-200",
-                )}
-              />
-            ))}
-          </div>
+        <div className="flex flex-wrap gap-6">
+          {PROBLEM_SPOTS.map((spot, index) => (
+            <motion.article
+              key={spot.id}
+              initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: DURATION, delay: index * 0.06 }}
+              className={cn(
+                "flex min-w-0 flex-1 basis-[min(100%,340px)] flex-col gap-5 rounded-hero p-9",
+                TINT_BG[spot.tint],
+              )}
+            >
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="inline-flex self-start rounded-full bg-ink px-3 py-1.5 font-heading text-sm font-extrabold text-cream">
+                  {spot.number}
+                </span>
+                <span className="font-heading text-sm font-extrabold tracking-[-0.01em] text-ink/70">
+                  {spot.step}
+                </span>
+              </div>
+
+              <p className="font-heading text-[clamp(1.75rem,3vw,2.5rem)] font-extrabold leading-[1.05] tracking-[-0.035em] text-ink">
+                &ldquo;{spot.moment}&rdquo;
+              </p>
+
+              <div className="h-px bg-ink/15" aria-hidden />
+
+              <h3 className="font-heading text-[1.625rem] font-extrabold leading-[1.1] tracking-[-0.03em] text-ink">
+                {spot.title}
+              </h3>
+              <p className="text-[17px] leading-normal text-[#3d322d]">{spot.body}</p>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>

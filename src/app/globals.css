@@ -4,72 +4,124 @@
 
 @layer base {
   :root {
-    /* Amplitude-inspired light marketing system */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 10%;
+    /* —— Marketing design system v0.1 (cream / ink / coral) —— */
+
+    /* Core */
+    --cream: #fffaf4;
+    --ink: #231815;
+    --coral: #e8452c;
+    --coral-text: #c2351d;
+    --coral-cta: #c2351d;
+    --hairline: #e8e1d8;
+    /* Named ink-muted so it does not collide with shadcn --muted (surface) */
+    --ink-muted: #7a6c64;
+    --muted-strong: #6b5d55;
+    --on-dark-muted: #b8aca4;
+
+    /* Tints */
+    --tint-butter: #fff1cf;
+    --tint-lilac: #ece8ff;
+    --tint-pink: #ffe4ea;
+    --tint-mint: #dff3e6;
+    --tint-peach: #ffe6dc;
+
+    /* Feature tiles */
+    --tile-butter: #ffd979;
+    --tile-lilac: #cfc3f7;
+    --tile-mint: #a8e3c2;
+
+    /* Chips */
+    --chip-amber-bg: #fff1cf;
+    --chip-amber-fg: #6b4200;
+    --chip-green-bg: #dcf3e3;
+    --chip-green-fg: #14532d;
+    --chip-ai-bg: #e9e3ff;
+    --chip-ai-fg: #4a2fc0;
+    --chip-grey-bg: #eceae7;
+    --chip-grey-fg: #44403c;
+
+    /* Type (families set by next/font variables) */
+    --font-heading: "Bricolage Grotesque", system-ui, sans-serif;
+    --font-body: "Inter", system-ui, sans-serif;
+    --font-wordmark: "Nunito", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    --tracking-heading: -0.04em;
+    --leading-heading: 1;
+    --h1-hero: clamp(58px, 10.5vw, 156px);
+
+    /* Shape */
+    --radius-pill: 999px;
+    --radius-panel: 28px;
+    --radius-hero: 32px;
+    --radius-cta: 40px;
+    --radius-tile: 48px;
+    --radius: 0.75rem;
+
+    /* Depth and focus */
+    --shadow-soft: 0 8px 30px rgba(35, 24, 21, 0.08);
+    --focus-ring: 2px solid var(--ink);
+    --focus-offset: 2px;
+
+    /* —— shadcn bridges (HSL triplets) —— */
+    --background: 36 100% 98%;
+    --foreground: 12 19% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
+    --card-foreground: 12 19% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
+    --popover-foreground: 12 19% 11%;
 
-    --primary: 221 87% 53%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary CTA = ink fill, cream text */
+    --primary: 12 19% 11%;
+    --primary-foreground: 36 100% 98%;
 
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 0 0% 10%;
+    --secondary: 36 33% 94%;
+    --secondary-foreground: 12 19% 11%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 0 0% 54%;
+    --muted: 36 33% 94%;
+    --muted-foreground: 18 10% 44%;
 
-    --accent: 221 87% 53%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 36 33% 94%;
+    --accent-foreground: 12 19% 11%;
 
-    --destructive: 0 72% 52%;
+    --destructive: 5 75% 44%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 221 87% 53%;
+    --border: 36 24% 88%;
+    --input: 36 18% 82%;
+    --ring: 12 19% 11%;
 
-    --radius: 0.625rem;
-
-    --glow: 221 87% 53%;
-    --glow-brand: 252 85% 59%;
-    --brand-gradient: linear-gradient(90deg, #2b5cf5 0%, #8b3ff0 50%, #f0399e 100%);
-    --brand-gradient-radial: radial-gradient(circle at 30% 20%, #2b5cf5 0%, #6a3ff2 45%, #f0399e 100%);
-
-    --navy: 232 57% 12%;
-    --navy-raised: 233 49% 20%;
-    --surface: 220 14% 96%;
+    /* Compatibility aliases until homepage rebuild */
+    --navy: 12 19% 11%;
+    --navy-raised: 12 16% 18%;
+    --surface: 36 33% 94%;
     --surface-raised: 0 0% 100%;
-    --headline: 0 0% 0%;
-    --subtext: 0 0% 34%;
+    --headline: 12 19% 11%;
+    --subtext: 18 10% 44%;
+    --on-light-heading: 12 19% 11%;
+    --on-light-body: 18 10% 44%;
+    --on-light-muted: 18 10% 44%;
 
-    --on-light-heading: 0 0% 0%;
-    --on-light-body: 0 0% 34%;
-    --on-light-muted: 0 0% 54%;
+    --sidebar-background: 36 100% 98%;
+    --sidebar-foreground: 12 19% 11%;
+    --sidebar-primary: 12 19% 11%;
+    --sidebar-primary-foreground: 36 100% 98%;
+    --sidebar-accent: 36 33% 94%;
+    --sidebar-accent-foreground: 12 19% 11%;
+    --sidebar-border: 36 24% 88%;
+    --sidebar-ring: 12 19% 11%;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 10%;
-    --sidebar-primary: 221 87% 53%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 14% 96%;
-    --sidebar-accent-foreground: 0 0% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 221 87% 53%;
-
-    --section-sand: #faf7f2;
-    --section-pricing: #eef3ff;
-    --section-hero: linear-gradient(160deg, #fbfbfc 0%, #f2f3f5 55%, #eceef1 100%);
+    --section-sand: var(--tint-butter);
+    --section-pricing: var(--tint-peach);
+    --section-hero: var(--cream);
     --section-pad: 96px;
     --section-pad-tight: 64px;
 
-    --font-display: "Space Grotesk", system-ui, sans-serif;
-    --font-hero: "Barlow Condensed", system-ui, sans-serif;
-    --font-sans: "IBM Plex Sans", system-ui, sans-serif;
-    --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    /* Legacy font aliases → new families */
+    --font-display: var(--font-heading);
+    --font-hero: var(--font-heading);
+    --font-sans: var(--font-body);
   }
 }
 
@@ -84,7 +136,9 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
+    background-color: var(--cream);
+    color: var(--ink);
   }
 
   h1,
@@ -93,18 +147,56 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-hero);
-    letter-spacing: -0.02em;
+    font-family: var(--font-heading);
+    letter-spacing: var(--tracking-heading);
+    line-height: var(--leading-heading);
+  }
+
+  :focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
   }
 }
 
 @layer utilities {
-  .bg-brand-signature {
-    background: var(--brand-gradient);
+  .bg-cream {
+    background-color: var(--cream);
   }
 
-  .bg-brand-radial {
-    background: var(--brand-gradient-radial);
+  .bg-ink {
+    background-color: var(--ink);
+  }
+
+  .bg-coral {
+    background-color: var(--coral);
+  }
+
+  .bg-coral-cta {
+    background-color: var(--coral-cta);
+  }
+
+  .text-ink {
+    color: var(--ink);
+  }
+
+  .text-cream {
+    color: var(--cream);
+  }
+
+  .text-coral {
+    color: var(--coral);
+  }
+
+  .text-coral-text {
+    color: var(--coral-text);
+  }
+
+  .text-ink-muted {
+    color: var(--ink-muted);
+  }
+
+  .text-muted-strong {
+    color: var(--muted-strong);
   }
 
   .bg-section-sand {
@@ -131,43 +223,45 @@
     color: hsl(var(--navy));
   }
 
-  .text-gradient {
-    background: var(--brand-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Brand signature gradient (indigo → cyan) for headline emphasis */
-  .text-gradient-brand {
-    background: linear-gradient(135deg, #5B4FFF 0%, #00D9F7 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* Neutralized legacy utilities — no rainbow gradients */
+  .bg-brand-signature,
+  .bg-brand-radial,
+  .gradient-strip {
+    background: var(--hairline);
   }
 
   .gradient-strip {
-    height: 64px;
-    background: var(--brand-gradient);
+    height: 2px;
+  }
+
+  .text-gradient,
+  .text-gradient-brand {
+    color: var(--coral-text);
+    background: none;
+    -webkit-text-fill-color: unset;
   }
 
   .media-frame {
-    border-radius: 1.25rem;
+    border-radius: var(--radius-hero);
     padding: 0.625rem;
-    background-image:
-      radial-gradient(circle, rgba(255, 255, 255, 0.25) 1.5px, transparent 1.5px),
-      var(--frame-gradient, var(--brand-gradient-radial));
-    background-size: 20px 20px, 100% 100%;
+    background: var(--tint-peach);
   }
 
   .media-frame--hero {
-    border-radius: 1.25rem;
+    border-radius: var(--radius-hero);
     padding: 0.625rem;
-    background-size: 20px 20px, 100% 100%;
   }
 
   .scroll-mt-nav {
-    scroll-margin-top: 5.5rem;
+    scroll-margin-top: 6.5rem; /* sticky header ~88px + breathing room */
+  }
+
+  .font-wordmark {
+    font-family: var(--font-wordmark), var(--font-heading), system-ui, sans-serif;
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
   }
 
   .animate-pricing-fade-slide {

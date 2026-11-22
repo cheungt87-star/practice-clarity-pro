@@ -1,56 +1,43 @@
 import type { Metadata } from "next";
-import { Barlow_Condensed, IBM_Plex_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { Bricolage_Grotesque, Inter, Nunito } from "next/font/google";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import Providers from "./providers";
 import { createRootMetadata } from "@/lib/seo/metadata";
 import { homepageSchemas, jsonLdScript } from "@/lib/seo/schema";
-import { LANDING_FAQS } from "@/data/landing";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-display",
+  variable: "--font-heading",
   display: "swap",
 });
 
-const barlowCondensed = Barlow_Condensed({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-hero",
+  variable: "--font-body",
   display: "swap",
 });
 
-const ibmPlexSans = IBM_Plex_Sans({
+const nunito = Nunito({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-mono",
+  weight: ["900"],
+  variable: "--font-wordmark",
   display: "swap",
 });
 
 export const metadata: Metadata = createRootMetadata();
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const schemas = homepageSchemas(
-    LANDING_FAQS.map((item) => ({ question: item.question, answer: item.answer })),
-  );
+  const schemas = homepageSchemas();
 
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="icon" href="/favicon.png?v=4" type="image/png" />
+        <link rel="apple-touch-icon" href="/apple-icon.png?v=4" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(schemas) }} />
       </head>
-      <body
-        className={`${spaceGrotesk.variable} ${barlowCondensed.variable} ${ibmPlexSans.variable} ${jetbrainsMono.variable} antialiased`}
-      >
+      <body className={`${bricolage.variable} ${inter.variable} ${nunito.variable} antialiased`}>
         <Providers>{children}</Providers>
         <GoogleAnalytics />
       </body>

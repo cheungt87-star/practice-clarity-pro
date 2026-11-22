@@ -7,14 +7,28 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { LANDING_FAQS } from "@/data/landing";
+import { cn } from "@/lib/utils";
 
-export default function FaqSection() {
+type FaqSectionProps = {
+  showHeading?: boolean;
+  className?: string;
+};
+
+export default function FaqSection({ showHeading = true, className }: FaqSectionProps) {
   return (
-    <section id="faq" className="scroll-mt-nav bg-section-sand px-6 py-20 sm:px-8 sm:py-24">
+    <section
+      id="faq"
+      className={cn(
+        "scroll-mt-nav bg-section-sand px-6 py-20 sm:px-8 sm:py-24",
+        className,
+      )}
+    >
       <div className="mx-auto max-w-[760px]">
-        <h2 className="mb-12 text-center font-hero text-[clamp(1.625rem,3.5vw,2.125rem)] font-bold uppercase leading-[1.08] tracking-tight text-black">
-          Questions, answered.
-        </h2>
+        {showHeading ? (
+          <h2 className="mb-12 text-center font-heading text-[clamp(2rem,4vw,3.25rem)] font-bold leading-none tracking-[-0.04em] text-ink">
+            Questions, answered.
+          </h2>
+        ) : null}
         <Accordion type="single" collapsible defaultValue="item-0" className="w-full">
           {LANDING_FAQS.map((item, index) => (
             <AccordionItem key={item.question} value={`item-${index}`} className="border-brand-gray-200">

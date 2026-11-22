@@ -6,7 +6,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import { trackDemoBooking } from "@/lib/analytics";
 
@@ -21,7 +20,6 @@ const emptyForm = {
   jobTitle: "",
   email: "",
   siteCount: "",
-  painPoint: "",
   companyWebsite: "",
 };
 
@@ -82,7 +80,7 @@ const BookDemoDialog = ({ open, onOpenChange }: BookDemoDialogProps) => {
       <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto border-neutral-200 bg-white text-neutral-900 shadow-xl">
           <DialogHeader>
-            <DialogTitle className="font-hero text-xl font-bold uppercase leading-[1.08] tracking-tight text-neutral-900">Start my free trial</DialogTitle>
+            <DialogTitle className="font-heading text-xl font-bold leading-none tracking-[-0.04em] text-ink">Start free trial</DialogTitle>
             <DialogDescription className="font-body text-left text-neutral-600">
               Fill in your details and we&apos;ll get your free trial set up.
             </DialogDescription>
@@ -126,18 +124,6 @@ const BookDemoDialog = ({ open, onOpenChange }: BookDemoDialogProps) => {
               />
             </div>
 
-            <div className="space-y-1.5">
-              <Label htmlFor="painPoint">What is your biggest pain point right now? *</Label>
-              <Textarea
-                id="painPoint"
-                required
-                value={form.painPoint}
-                onChange={(e) => update("painPoint", e.target.value)}
-                placeholder="Tell us what is most challenging for your practice…"
-                rows={4}
-                className="resize-y min-h-[100px]"
-              />
-            </div>
             <input
               type="text"
               name="companyWebsite"
@@ -157,12 +143,8 @@ const BookDemoDialog = ({ open, onOpenChange }: BookDemoDialogProps) => {
               for more information.
             </p>
 
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full rounded-full border border-brand-electric bg-brand-electric py-5 font-display text-base font-semibold text-white hover:bg-brand-electric/90 hover:opacity-90"
-            >
-              {isSubmitting ? "Sending..." : "Start free trial"}
+            <Button type="submit" disabled={isSubmitting} size="lg" className="w-full text-base font-semibold">
+              {isSubmitting ? "Sending..." : "I would like a demo"}
             </Button>
           </form>
         </DialogContent>
