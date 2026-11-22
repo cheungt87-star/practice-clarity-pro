@@ -6,23 +6,25 @@ type LandingButtonProps = {
   children: React.ReactNode;
   onClick?: () => void;
   href?: string;
-  variant?: "primary" | "secondary" | "blue" | "white";
+  variant?: "primary" | "secondary" | "on-coral" | "blue" | "white";
   size?: "md" | "lg" | "sm";
   className?: string;
   type?: "button" | "submit";
 };
 
 const sizeClasses = {
-  sm: "px-5 py-2.5 text-sm",
-  md: "px-6 py-3.5 text-base",
-  lg: "px-8 py-4 text-lg",
+  sm: "h-8 px-4 text-[13px]",
+  md: "h-10 px-5 text-sm",
+  lg: "h-12 px-6 text-[15px]",
 };
 
 const variantClasses = {
-  primary: "border border-brand-electric bg-brand-electric text-white hover:opacity-90",
-  secondary: "border border-black bg-white text-black hover:bg-brand-gray-100",
-  blue: "border border-brand-blue bg-brand-blue text-white hover:opacity-90",
-  white: "border border-white bg-white text-black hover:bg-brand-gray-100",
+  primary: "bg-ink text-cream hover:opacity-90 shadow-soft",
+  secondary: "bg-cream text-ink ring-1 ring-inset ring-ink/20 hover:bg-secondary",
+  "on-coral": "bg-transparent text-cream ring-1 ring-inset ring-cream/80 hover:bg-cream/10",
+  /* Legacy aliases → primary/secondary language */
+  blue: "bg-ink text-cream hover:opacity-90 shadow-soft",
+  white: "bg-cream text-ink ring-1 ring-inset ring-ink/20 hover:bg-secondary",
 };
 
 export function LandingButton({
@@ -35,7 +37,7 @@ export function LandingButton({
   type = "button",
 }: LandingButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center rounded-full font-semibold transition-opacity",
+    "inline-flex items-center justify-center rounded-pill font-semibold transition-[color,background-color,transform,opacity] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:ring-offset-cream active:scale-[0.98]",
     sizeClasses[size],
     variantClasses[variant],
     className,

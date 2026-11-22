@@ -2,13 +2,14 @@ export const SITE_URL = "https://www.supergpapp.co.uk";
 export const SITE_NAME = "SuperGP";
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/features/dashboard-1.png`;
 
-export const DEFAULT_TITLE = "All in one system for GP's and PCN's | SuperGP";
-export const DEFAULT_DESCRIPTION = "All in one system for GP's and PCN's";
+export const DEFAULT_TITLE = "Less faff. More patients. | SuperGP";
+export const DEFAULT_DESCRIPTION =
+  "SuperGP is the AI-powered app for GP practices — plan your rota, answer policy questions, and keep every compliance task on track. 14 days free.";
 
 export const ORGANIZATION = {
   name: SITE_NAME,
   url: SITE_URL,
-  logo: `${SITE_URL}/favicon.png`,
+  logo: `${SITE_URL}/landing/supergp-logo.png`,
   email: "info@supergpapp.co.uk",
   description: DEFAULT_DESCRIPTION,
 };

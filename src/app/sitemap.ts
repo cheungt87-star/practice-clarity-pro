@@ -4,10 +4,15 @@ import { SITE_URL } from "@/lib/seo/constants";
 
 function priorityFor(path: string): number {
   if (path === "/") return 1;
-  if (path.startsWith("/features/") || path.startsWith("/compare/") || path.startsWith("/for/")) {
+  if (
+    path.startsWith("/features/") ||
+    path.startsWith("/compare/") ||
+    path.startsWith("/for/") ||
+    path.startsWith("/products/")
+  ) {
     return 0.8;
   }
-  if (path === "/about" || path === "/pricing") return 0.7;
+  if (path === "/about" || path === "/pricing" || path === "/faq") return 0.7;
   return 0.5;
 }
 

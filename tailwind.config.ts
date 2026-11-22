@@ -14,10 +14,12 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["var(--font-display)", "system-ui", "sans-serif"],
-        hero: ["var(--font-hero)", "system-ui", "sans-serif"],
-        body: ["var(--font-sans)"],
-        sans: ["var(--font-sans)"],
+        heading: ["var(--font-heading)", "system-ui", "sans-serif"],
+        display: ["var(--font-heading)", "system-ui", "sans-serif"],
+        hero: ["var(--font-heading)", "system-ui", "sans-serif"],
+        body: ["var(--font-body)", "system-ui", "sans-serif"],
+        sans: ["var(--font-body)", "system-ui", "sans-serif"],
+        wordmark: ["var(--font-wordmark)", "var(--font-heading)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SF Mono", "Menlo", "monospace"],
       },
       colors: {
@@ -54,6 +56,49 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        cream: "var(--cream)",
+        ink: {
+          DEFAULT: "var(--ink)",
+          muted: "var(--ink-muted)",
+        },
+        coral: {
+          DEFAULT: "var(--coral)",
+          text: "var(--coral-text)",
+          cta: "var(--coral-cta)",
+        },
+        hairline: "var(--hairline)",
+        "muted-strong": "var(--muted-strong)",
+        "on-dark-muted": "var(--on-dark-muted)",
+        tint: {
+          butter: "var(--tint-butter)",
+          lilac: "var(--tint-lilac)",
+          pink: "var(--tint-pink)",
+          mint: "var(--tint-mint)",
+          peach: "var(--tint-peach)",
+        },
+        tile: {
+          butter: "var(--tile-butter)",
+          lilac: "var(--tile-lilac)",
+          mint: "var(--tile-mint)",
+        },
+        chip: {
+          amber: {
+            DEFAULT: "var(--chip-amber-bg)",
+            foreground: "var(--chip-amber-fg)",
+          },
+          green: {
+            DEFAULT: "var(--chip-green-bg)",
+            foreground: "var(--chip-green-fg)",
+          },
+          ai: {
+            DEFAULT: "var(--chip-ai-bg)",
+            foreground: "var(--chip-ai-fg)",
+          },
+          grey: {
+            DEFAULT: "var(--chip-grey-bg)",
+            foreground: "var(--chip-grey-fg)",
+          },
+        },
         surface: {
           DEFAULT: "hsl(var(--surface))",
           raised: "hsl(var(--surface-raised))",
@@ -62,26 +107,27 @@ export default {
           DEFAULT: "hsl(var(--navy))",
           raised: "hsl(var(--navy-raised))",
         },
-        glow: "hsl(var(--glow))",
         headline: "hsl(var(--headline) / <alpha-value>)",
         subtext: "hsl(var(--subtext))",
         "on-light-heading": "hsl(var(--on-light-heading))",
         "on-light-body": "hsl(var(--on-light-body))",
         "on-light-muted": "hsl(var(--on-light-muted))",
+        /* Remap legacy brand.* so existing classNames stay readable.
+           brand.bg + brand.text were a dark band (ink + cream), not page cream. */
         brand: {
-          blue: "#1e61f0",
-          navy: "#0d1230",
-          bg: "#070B14",
-          electric: "#5B4FFF",
-          critical: "#FF4D6A",
-          warning: "#FFB830",
-          text: "#F0F4FF",
+          blue: "var(--coral-text)",
+          navy: "var(--ink)",
+          bg: "var(--ink)",
+          electric: "var(--ink)",
+          critical: "var(--coral)",
+          warning: "var(--chip-amber-fg)",
+          text: "var(--cream)",
           gray: {
-            900: "#1a1a1a",
-            700: "#565656",
-            500: "#8a8a8a",
-            200: "#e5e7eb",
-            100: "#f2f3f5",
+            900: "var(--ink)",
+            700: "var(--ink-muted)",
+            500: "var(--muted-strong)",
+            200: "var(--hairline)",
+            100: "var(--tint-peach)",
           },
         },
         sidebar: {
@@ -99,6 +145,14 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        pill: "var(--radius-pill)",
+        panel: "var(--radius-panel)",
+        hero: "var(--radius-hero)",
+        cta: "var(--radius-cta)",
+        tile: "var(--radius-tile)",
+      },
+      boxShadow: {
+        soft: "var(--shadow-soft)",
       },
       keyframes: {
         "accordion-down": {

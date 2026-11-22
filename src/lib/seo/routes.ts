@@ -109,4 +109,16 @@ const MONEY_PAGE_PATHS = [
   "/about",
 ];
 
-export const INDEXED_ROUTES = ["/", "/pricing", "/privacy", ...MONEY_PAGE_PATHS];
+export const PRODUCT_ROUTES = [
+  "/products/policy-gpt",
+  "/products/rota-assistant",
+] as const;
+
+export const INDEXED_ROUTES = [
+  "/",
+  "/pricing",
+  "/faq",
+  "/privacy",
+  ...MONEY_PAGE_PATHS,
+  ...PRODUCT_ROUTES,
+];
