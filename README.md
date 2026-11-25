@@ -39,7 +39,7 @@ The demo form submits directly to Formspree from the frontend.
 
 ## SEO
 
-- Sitemap: `/sitemap.xml` — homepage, pricing, privacy, `/features/*`, `/for/*`, `/compare/*`, and `/about`
+- Sitemap: `/sitemap.xml` — `/`, `/pricing`, `/faq`, `/privacy`, `/about`, `/products/policy-gpt`, `/products/rota-assistant`
 - Robots: `/robots.txt`
 - Structured data: Organization + SoftwareApplication on homepage; page-level FAQ / SoftwareApplication / Person on content pages
 - `/contact` ships real content but stays `noindex` (intentional — not a ranking target)

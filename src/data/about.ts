@@ -65,7 +65,6 @@ export const ABOUT_PAGE: SeoPageContent = {
   relatedLinks: [
     { href: "/contact", label: "Contact" },
     { href: "/pricing", label: "Pricing" },
-    { href: "/features/rota-planner", label: "GP rota software" },
   ],
   schema: "about",
 };

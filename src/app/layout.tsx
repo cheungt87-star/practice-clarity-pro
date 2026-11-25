@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import { Bricolage_Grotesque, Inter, Nunito } from "next/font/google";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import Providers from "./providers";
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${bricolage.variable} ${inter.variable} ${nunito.variable} antialiased`}>
         <Providers>{children}</Providers>
         <GoogleAnalytics />
+        <Analytics />
       </body>
     </html>
   );
